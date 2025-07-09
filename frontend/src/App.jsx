@@ -46,7 +46,7 @@ function App() {
             <Routes>
               {/* Rutas publicas */}
               <Route path="/" element={<PergolaOnboarding/>}/>
-              <Route path="/register" element={<SignUpForm/>}/>
+              <Route path="/register" element={<SignUp/>}/>
               <Route path="/login" element={<Login/>}/>
               <Route path="/forgot-password" element={<ForgotPassword/>}/>
               <Route path="/verify-code" element={<VerifyCode/>}/>
