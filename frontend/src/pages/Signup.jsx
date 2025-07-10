@@ -9,6 +9,8 @@ import PhoneInput from '../components/Input/PhoneInput'
 import DUIInput from '../components/Input/DUIInput'
 import DateInput from '../components/Input/DateInput'
 import { ChevronLeft } from 'lucide-react'
+import Pergola from '../assets/pergola.png'
+import Logo from '../assets/logo.png'
 
 const SignUp = () => {
   const [formData, setFormData] = useState({
@@ -163,9 +165,7 @@ const SignUp = () => {
       <div className="w-full lg:w-2/5 flex flex-col justify-center items-center px-6 sm:px-8 lg:px-12 py-8 lg:py-0 relative" style={{ backgroundColor: '#E8E1D8' }}>
         {/* P decorativa en esquina superior izquierda */}
         <div className="absolute top-4 left-4 sm:top-6 sm:left-6 lg:top-8 lg:left-8">
-          <div className="w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 opacity-60 bg-gray-300 rounded flex items-center justify-center">
-            <span className="text-xs text-gray-600">P</span>
-          </div>
+          <img src={Pergola} alt="P decorativa" className="w-8 h-auto sm:w-10 lg:w-12 opacity-60 object-contain"/>
         </div>
         <div className="text-center">
           {/* Logo placeholder */}
