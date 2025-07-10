@@ -6,7 +6,7 @@ import jsonwebtoken from "jsonwebtoken"
 import { config } from "../utils/config.js"
 //POST (CREATE)
 signupController.registerEmployee = async (req, res) => {
-    const {name, lastName, username, email,  password, phoneNumber, userType, issNumber, isVerified} = req.body
+    const {name, lastName, username, email,  password, phoneNumber, birthDate, DUI, userType, hireDate, isVerified} = req.body
 
     try {
         // Verificacion de si el empleado ya existe
@@ -17,8 +17,8 @@ signupController.registerEmployee = async (req, res) => {
         }
         // Encriptacion de contraseña
         const hashedPassword = await bcryptjs.hash(password, 10)
-        const newUser = new employeesModel({name, lastName, username, email,  password: hashedPassword, phoneNumber, userType, issNumber, isVerified: isVerified || false})
-
+        const newUser = new employeesModel({name, lastName, username, email,  password: hashedPassword, phoneNumber, birthDate: birthDate ? new Date(birthDate): null, DUI: DUI, userType: userType, hireDate: hireDate ? new Date(hireDate): null, isVerified: isVerified || false})
+        // Guardar el empleado
         await newUser.save()
         // TOKEN
         jsonwebtoken.sign({id: newUser._id, userType}, config.JWT.secret, { expiresIn: config.JWT.expiresIn}, (err, token) => {

@@ -8,6 +8,8 @@ import FacebookAuthButton from '../components/Buttons/FacebookButton'
 import TextInput from '../components/Input/Input'
 import PasswordInput from '../components/Input/PasswordInput'
 import { ChevronLeft } from 'lucide-react'
+import Pergola from '../assets/pergola.png'
+import Logo from '../assets/logo.png'
 
 const Login = () => {
   const [email, setEmail] = useState('')
@@ -77,15 +79,11 @@ const Login = () => {
       <div className="w-full lg:w-2/5 flex flex-col justify-center items-center px-6 sm:px-8 lg:px-12 py-8 lg:py-0 relative" style={{ backgroundColor: '#E8E1D8' }}>
         {/* P decorativa en esquina superior izquierda */}
         <div className="absolute top-4 left-4 sm:top-6 sm:left-6 lg:top-8 lg:left-8">
-          <div className="w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 opacity-60 bg-gray-300 rounded flex items-center justify-center">
-            <span className="text-xs text-gray-600">P</span>
-          </div>
+          <img src={Pergola} alt="P decorativa" className="w-8 h-auto sm:w-10 lg:w-12 opacity-60 object-contain"/>
         </div>
         <div className="text-center">
           {/* Logo placeholder */}
-          <div className="mb-6 lg:mb-8 mx-auto bg-white rounded-lg shadow-lg flex items-center justify-center" style={{ width: 'min(320px, 90vw)', height: '200px' }}>
-            <span className="text-gray-500 text-sm">Logo Pérgola</span>
-          </div>
+          <img src={Logo} alt="Pérgola Joyería Logo" className="mb-6 lg:mb-8 mx-auto max-w-full object-contain" style={{ width: 'min(320px, 90vw)', height: 'auto', maxHeight: '400px' }}/>
           {/* Texto debajo de la imagen */}
           <div className="max-w-sm mx-auto">
             <h3 className="text-lg sm:text-xl lg:text-2xl font-[Quicksand] font-semibold mb-1 sm:mb-2" style={{ color: '#A73249' }}>

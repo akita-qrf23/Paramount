@@ -91,7 +91,7 @@ const employeesSchema = new Schema({
   userType: {
     type: String,
     required: [true, "El tipo de usuario es obligatorio"],
-    enum: ["admin", "colaborador"],
+    enum: ["vendedor", "colaborador"],
     default: "colaborador"
   },
   profilePic: {

@@ -17,7 +17,7 @@ signupCustomerController.registerCustomer = async (req, res) => {
         }
         //Encriptacion de contraseña
         const hashedPassword = await bcryptjs.hash(password, 10)
-        const newCustomer = new customersModel({name, lastName, username, email, phoneNumber, birthDate, DUI, password: hashedPassword, isVerified: isVerified || false})
+        const newCustomer = new customersModel({name, lastName, username, email, phoneNumber, birthDate: birthDate ? new Date(birthDate): null, DUI: DUI, password: hashedPassword, isVerified: isVerified || false})
 
         await newCustomer.save()
         const verCode = crypto.randomBytes(3).toString('hex')
