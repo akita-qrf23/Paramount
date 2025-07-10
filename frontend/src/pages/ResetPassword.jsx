@@ -2,8 +2,9 @@ import { useState, useEffect } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
 import { toast } from 'react-hot-toast'
 import PasswordInput from '../components/Input/PasswordInput'
-import monogramHq from '../assets/monogram-hq.png'
-import logo from '../assets/logo.png'
+import Pergola from '../assets/pergola.png'
+import Logo from '../assets/logo.png'
+import { ChevronLeft } from 'lucide-react'
 
 const ResetPassword = () => {
   const [newPassword, setNewPassword] = useState('')
@@ -18,6 +19,7 @@ const ResetPassword = () => {
       navigate('/forgot-password')
     }
   }, [email, navigate])
+
   const validatePassword = (password) => {
     const errors = []
     if (password.length < 8) {
@@ -60,11 +62,11 @@ const ResetPassword = () => {
         credentials: 'include',
         body: JSON.stringify({ newPassword })
       })
+      
       const data = await response.json()
 
       if (response.ok) {
         toast.success('Contraseña cambiada exitosamente')
-        // Redirigir al login después de un breve delay
         setTimeout(() => {
           navigate('/login')
         }, 1500)
@@ -79,105 +81,101 @@ const ResetPassword = () => {
     }
   }
   return (
-    <div className="relative w-full h-screen bg-[#F4F1DE] overflow-hidden font-[Alexandria]">
-      {/* DESKTOP */}
-      <div className="hidden lg:flex h-full">
-        {/* Seccion izquierda con logo */}
-        <div className="w-1/2 relative flex flex-col items-center justify-center bg-[#A9A9A9] overflow-hidden">
-          <img src={monogramHq} alt="Monogram" className="absolute top-6 left-6 w-12 h-12 object-contain"/>
-          <div className="text-center mb-8">
-            <img src={logo} alt="MixArt Logo" className="w-120 h-auto object-contain mb-6" />
-          </div>
-        </div>     
-        {/* Seccion derecha con formulario */}
-        <div className="w-1/2 flex flex-col justify-center px-16 bg-[#F4F1DE]">
-          <div className="max-w-md w-full mx-auto">
-            {/* Boton de volver */}
-            <button onClick={() => navigate('/verify-code', { state: { email } })} className="flex items-center text-[#7A6E6E] mb-8 hover:text-[#5c5252] transition">
-              <span className="text-xl mr-2">&lt;</span>
-              <span className="text-md">Atrás</span>
+    <div className="min-h-screen flex flex-col lg:flex-row">
+      {/* Sección Izquierda - Branding */}
+      <div className="w-full lg:w-2/5 flex flex-col justify-center items-center px-6 sm:px-8 lg:px-12 py-8 lg:py-0 relative overflow-hidden" style={{ backgroundColor: '#E8E1D8' }}>
+        {/* P decorativa - FIJA */}
+        <div className="fixed top-4 left-4 sm:top-6 sm:left-6 lg:top-8 lg:left-8 z-10">
+          <img src={Pergola} alt="P decorativa" className="w-8 h-auto sm:w-10 lg:w-12 opacity-60 object-contain"/>
+        </div>
+        <div className="text-center flex-shrink-0">
+          {/* Logo - FIJO */}
+          <img src={Logo} alt="Pérgola Joyería Logo" className="mx-auto max-w-full object-contain" style={{ width: 'min(320px, 90vw)', height: 'auto', maxHeight: '400px' }}/>
+        </div>
+      </div>
+      {/* Sección Derecha - Reset Password Content */}
+      <div className="w-full lg:w-3/5 flex flex-col justify-center items-center px-8 sm:px-12 lg:px-16 py-8 lg:py-0 relative" style={{ backgroundColor: '#E3C6B8' }}>
+        <div className="w-full max-w-lg text-center">
+          {/* Header */}
+          <div className="flex justify-between items-center mb-10 lg:mb-12">
+            <button
+              onClick={() => navigate('/verify-code', { state: { email } })}
+              className="flex items-center font-[Quicksand] font-semibold hover:opacity-70 transition-opacity text-sm lg:text-base"
+              style={{ color: '#3D1609' }}
+            >
+              <ChevronLeft size={18} className="mr-1" />
+              Atrás
             </button>
-            {/* Titulo */}
-            <div className="text-center mb-8">
-              <h1 className="text-3xl font-bold text-[#7A6E6E] mb-2">Nueva contraseña</h1>
-              <p className="text-[#7A6E6E] mb-6">Crea una nueva contraseña segura para tu cuenta</p>
-              <div className="w-full h-px bg-[#7A6E6E]"></div>
-            </div>
-            {/* Informacion de seguridad */}
-            <div className="bg-[#EBFEF5] border border-[#81B29A] rounded-lg p-4 mb-6">
-              <h3 className="text-sm font-semibold text-[#7A6E6E] mb-2">Tu contraseña debe contener:</h3>
-              <ul className="text-xs text-[#7A6E6E] space-y-1">
+          </div>
+          {/* Content */}
+          <div className="mb-10 lg:mb-12">
+            {/* Title */}
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-[Quicksand] font-bold mb-3 lg:mb-4" style={{ color: '#3D1609' }}>
+              Nueva contraseña
+            </h2>
+            {/* Subtitle */}
+            <h3 className="text-lg sm:text-xl lg:text-2xl font-[Quicksand] font-medium mb-8 lg:mb-10" style={{ color: '#A73249' }}>
+              Restablece tu acceso
+            </h3>
+            {/* Description */}
+            <p className="text-base font-[Quicksand] mb-8" style={{ color: '#3D1609' }}>
+              Crea una nueva contraseña segura para tu cuenta
+            </p>
+            {/* Información de seguridad */}
+            <div className="bg-white/30 border border-white/50 rounded-lg p-4 mb-8 text-left">
+              <h4 className="text-sm font-[Quicksand] font-semibold mb-3" style={{ color: '#3D1609' }}>
+                Tu contraseña debe contener:
+              </h4>
+              <ul className="text-sm font-[Quicksand] space-y-1" style={{ color: '#3D1609' }}>
                 <li>• Mínimo 8 caracteres</li>
                 <li>• Al menos una letra mayúscula</li>
                 <li>• Al menos una letra minúscula</li>
                 <li>• Al menos un número</li>
               </ul>
             </div>
-            {/* Formulario */}
+            {/* Form */}
             <form onSubmit={handleSubmit} className="space-y-6">
-              <PasswordInput text="Nueva contraseña:" value={newPassword} onChange={(e) => setNewPassword(e.target.value)} placeholder="Tu nueva contraseña" disabled={isLoading} required/>
-              <PasswordInput text="Confirmar contraseña:" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} placeholder="Confirma tu contraseña" disabled={isLoading} required/>
+              <PasswordInput
+                text="Nueva contraseña:"
+                value={newPassword}
+                onChange={(e) => setNewPassword(e.target.value)}
+                placeholder="Tu nueva contraseña"
+                disabled={isLoading}
+                required
+              />
+              <PasswordInput
+                text="Confirmar contraseña:"
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
+                placeholder="Confirma tu contraseña"
+                disabled={isLoading}
+                required
+              />
               {/* Indicador de coincidencia de contraseñas */}
               {confirmPassword && (
-                <div className={`text-sm ${newPassword === confirmPassword ? 'text-green-600' : 'text-red-600'}`}>
+                <div className={`text-sm font-[Quicksand] ${
+                  newPassword === confirmPassword ? 'text-green-600' : 'text-red-600'
+                }`}>
                   {newPassword === confirmPassword ? '✓ Las contraseñas coinciden' : '✗ Las contraseñas no coinciden'}
                 </div>
               )}
-              <div className="pt-4">
-                <button type="submit" disabled={isLoading} className={`w-full h-12 bg-[#E07A5F] border-[#E07A5F] hover:bg-transparent border-2 text-white text-base font-semibold leading-6 rounded-md transition duration-300 shadow-sm font-[Alexandria] ${isLoading ? 'opacity-50 cursor-not-allowed' : 'hover:text-[#E07A5F] cursor-pointer'}`}>
-                  {isLoading ? 'Cambiando contraseña...' : 'Cambiar contraseña'}
-                </button>
-              </div>
             </form>
           </div>
-        </div>
-      </div>
-      {/* MOBILE */}
-      <div className="flex lg:hidden flex-col min-h-screen px-6 py-8">
-        {/* Header movil */}
-        <div className="flex items-center justify-between mb-8">
-          <button onClick={() => navigate('/verify-code', { state: { email } })} className="flex items-center text-[#7A6E6E] hover:text-[#5c5252] transition">
-            <span className="text-xl mr-2">&lt;</span>
-            <span className="text-sm">Atrás</span>
+          {/* Submit Button */}
+          <button
+            onClick={handleSubmit}
+            disabled={isLoading}
+            className="w-full py-4 px-4 rounded-lg font-[Quicksand] font-bold text-xl transition-all duration-300 hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed"
+            style={{ 
+              backgroundColor: '#A73249',
+              color: '#FFFFFF'
+            }}
+          >
+            {isLoading ? 'Cambiando contraseña...' : 'Cambiar contraseña'}
           </button>
-          <img src={monogramHq} alt="Monogram" className="w-8 h-8 object-contain"/>
-        </div>
-        {/* Logo centrado */}
-        <div className="text-center mb-8">
-          <img src={logo} alt="MixArt Logo" className="w-48 h-auto object-contain mx-auto mb-4" />
-        </div>
-        {/* Contenido del formulario movil */}
-        <div className="flex-1 flex flex-col justify-center max-w-sm mx-auto w-full">
-          <h1 className="text-2xl font-bold text-[#7A6E6E] mb-2 text-center">Nueva contraseña</h1>
-          <p className="text-[#7A6E6E] mb-6 text-center text-sm">Crea una contraseña segura</p>
-          {/* Informacion de seguridad movil */}
-          <div className="bg-[#EBFEF5] border border-[#81B29A] rounded-lg p-3 mb-4">
-            <h3 className="text-xs font-semibold text-[#7A6E6E] mb-1">Debe contener:</h3>
-            <ul className="text-xs text-[#7A6E6E] space-y-0.5">
-              <li>• Mínimo 8 caracteres</li>
-              <li>• Una mayúscula y minúscula</li>
-              <li>• Al menos un número</li>
-            </ul>
-          </div>
-          {/* Formulario movil */}
-          <form onSubmit={handleSubmit} className="space-y-4">
-            <PasswordInput text="Nueva contraseña:" value={newPassword} onChange={(e) => setNewPassword(e.target.value)} placeholder="Tu nueva contraseña" disabled={isLoading} required/>
-            <PasswordInput text="Confirmar:" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} placeholder="Confirma tu contraseña" disabled={isLoading} required/>
-            {/* Indicador de coincidencia movil */}
-            {confirmPassword && (
-              <div className={`text-xs ${newPassword === confirmPassword ? 'text-green-600' : 'text-red-600'}`}>
-                {newPassword === confirmPassword ? '✓ Coinciden' : '✗ No coinciden'}
-              </div>
-            )}
-            <div className="pt-4">
-              <button type="submit" disabled={isLoading} className={`w-full h-12 bg-[#E07A5F] border-[#E07A5F] hover:bg-transparent border-2 text-white text-base font-semibold leading-6 rounded-md transition duration-300 shadow-sm font-[Alexandria] ${isLoading ? 'opacity-50 cursor-not-allowed' : 'hover:text-[#E07A5F] cursor-pointer'}`}>
-                {isLoading ? 'Cambiando...' : 'Cambiar contraseña'}
-              </button>
-            </div>
-          </form>
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 export default ResetPassword
