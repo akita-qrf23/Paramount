@@ -6,7 +6,6 @@ import { ThemeProvider } from './context/ThemeContext'
 import ForgotPassword from './pages/ForgotPassword'
 import VerifyCode from './pages/VerifyCode'
 import ResetPassword from './pages/ResetPassword'
-import GoogleAuthCallback from './pages/GoogleAuthCallback'
 import ProtectedRoute from './components/Auth/ProtectedRoute'
 import PergolaOnboarding from './pages/onBoarding'
 import Login from './pages/Login'
@@ -51,8 +50,6 @@ function App() {
               <Route path="/forgot-password" element={<ForgotPassword/>}/>
               <Route path="/verify-code" element={<VerifyCode/>}/>
               <Route path="/reset-password" element={<ResetPassword/>}/>
-              <Route path="/auth/google/success" element={<GoogleAuthCallback/>}/>
-              <Route path="/auth/google/failure" element={<GoogleAuthCallback/>}/>
               {/* Rutas protegidas */}
               <Route  path="/main" element={<ProtectedRoute><MainPage/></ProtectedRoute>}/>  
               <Route path="*" element={<Navigate to="/" replace/>}/>

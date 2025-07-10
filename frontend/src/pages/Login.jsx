@@ -17,7 +17,6 @@ const Login = () => {
   const navigate = useNavigate()
   const location = useLocation()
   const { Login: authLogin, user, isLoading: authLoading } = useAuth()
-
   // Redirigir si ya está autenticado
   useEffect(() => {
     if (!authLoading && user) {
@@ -36,7 +35,6 @@ const Login = () => {
       toast.error('Por favor ingresa un email válido')
       return
     }
-    
     setIsLoading(true)
     try {
       const result = await authLogin(email, password, rememberMe)
@@ -73,7 +71,6 @@ const Login = () => {
       </div>
     )
   }
-
   return (
     <div className="min-h-screen flex flex-col lg:flex-row">
       {/* Sección Izquierda - Branding */}
@@ -84,13 +81,11 @@ const Login = () => {
             <span className="text-xs text-gray-600">P</span>
           </div>
         </div>
-        
         <div className="text-center">
           {/* Logo placeholder */}
           <div className="mb-6 lg:mb-8 mx-auto bg-white rounded-lg shadow-lg flex items-center justify-center" style={{ width: 'min(320px, 90vw)', height: '200px' }}>
             <span className="text-gray-500 text-sm">Logo Pérgola</span>
           </div>
-          
           {/* Texto debajo de la imagen */}
           <div className="max-w-sm mx-auto">
             <h3 className="text-lg sm:text-xl lg:text-2xl font-[Quicksand] font-semibold mb-1 sm:mb-2" style={{ color: '#A73249' }}>
@@ -105,7 +100,6 @@ const Login = () => {
           </div>
         </div>
       </div>
-
       {/* Sección Derecha - Login Content */}
       <div className="w-full lg:w-3/5 flex flex-col justify-center items-center px-8 sm:px-12 lg:px-16 py-8 lg:py-0 relative" style={{ backgroundColor: '#E3C6B8' }}>
         <div className="w-full max-w-lg text-center">
@@ -120,19 +114,16 @@ const Login = () => {
               Atrás
             </button>
           </div>
-
           {/* Content */}
           <div className="mb-10 lg:mb-12">
             {/* Title */}
             <h2 className="text-2xl sm:text-3xl lg:text-4xl font-[Quicksand] font-bold mb-3 lg:mb-4" style={{ color: '#3D1609' }}>
               Iniciar sesión
             </h2>
-            
             {/* Subtitle */}
             <h3 className="text-lg sm:text-xl lg:text-2xl font-[Quicksand] font-medium mb-8 lg:mb-10" style={{ color: '#A73249' }}>
               Únete a nuestro equipo
             </h3>
-            
             {/* Login Form */}
             <div className="space-y-6">
               <TextInput
@@ -144,7 +135,6 @@ const Login = () => {
                 disabled={isLoading}
                 required
               />
-
               <PasswordInput
                 text="Contraseña:"
                 value={password}
@@ -153,7 +143,6 @@ const Login = () => {
                 disabled={isLoading}
                 required
               />
-
               <div className="flex items-center justify-between">
                 <label className="flex items-center">
                   <input
@@ -177,14 +166,12 @@ const Login = () => {
               </div>
             </div>
           </div>
-
           {/* Social Login Buttons */}
           <div className="space-y-4 mb-8">
             <AppleAuthButton />
             <GoogleButton />
             <FacebookAuthButton />
           </div>
-
           {/* Login Button */}
           <button
             onClick={handleLogin}
@@ -197,7 +184,6 @@ const Login = () => {
           >
             {isLoading ? 'Iniciando sesión...' : 'Continuar'}
           </button>
-
           {/* Register Link */}
           <p className="text-center mt-8 font-[Quicksand] text-sm" style={{ color: '#3D1609' }}>
             ¿No tienes una cuenta?{' '}
