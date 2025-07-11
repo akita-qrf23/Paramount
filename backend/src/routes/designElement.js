@@ -10,11 +10,11 @@ const upload = multer({dest: "public/"})
 // Rutas que no requieren un parámetro en específico
 router.route("/")
     .get(designElementsController.getElements)
-    .post(upload.single("elementImage"), designElementsController.postElements)
+    .post(upload.single("image"), designElementsController.postElements)
 // Rutas que requieren un parámetro en específico
 router.route("/:id")
     .get(designElementsController.getElement)
-    .put(upload.single("elementImage"), designElementsController.putElements)
+    .put(upload.single("image"), designElementsController.putElements)
     .delete(designElementsController.deleteElements)
 
 export default router

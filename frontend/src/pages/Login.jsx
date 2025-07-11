@@ -74,24 +74,20 @@ const Login = () => {
     )
   }
   return (
-    <div className="min-h-screen flex flex-col lg:flex-row">
+    <div className="min-h-screen w-full flex flex-col lg:flex-row overflow-hidden">
       {/* Sección Izquierda - Branding */}
-      <div className="w-full lg:w-2/5 flex flex-col justify-center items-center px-6 sm:px-8 lg:px-12 py-8 lg:py-0 relative" style={{ backgroundColor: '#E8E1D8' }}>
+      <div className="w-full lg:w-2/5 flex flex-col justify-center items-center px-6 sm:px-8 lg:px-12 py-8 relative" style={{ backgroundColor: '#E8E1D8' }}>
         {/* P decorativa en esquina superior izquierda */}
         <div className="absolute top-4 left-4 sm:top-6 sm:left-6 lg:top-8 lg:left-8">
-          <img src={Pergola} alt="P decorativa" className="w-8 h-auto sm:w-10 lg:w-12 opacity-60 object-contain"/>
+          <img src={Pergola} alt="P decorativa" className="w-8 sm:w-10 lg:w-12 opacity-60 object-contain" />
         </div>
         <div className="text-center">
           {/* Logo placeholder */}
-          <img src={Logo} alt="Pérgola Joyería Logo" className="mb-6 lg:mb-8 mx-auto max-w-full object-contain" style={{ width: 'min(320px, 90vw)', height: 'auto', maxHeight: '400px' }}/>
+          <img src={Logo} alt="Logo" className="mb-6 lg:mb-8 mx-auto object-contain" style={{ width: 'min(320px, 90vw)', maxHeight: '400px' }} />
           {/* Texto debajo de la imagen */}
           <div className="max-w-sm mx-auto">
-            <h3 className="text-lg sm:text-xl lg:text-2xl font-[Quicksand] font-semibold mb-1 sm:mb-2" style={{ color: '#A73249' }}>
-              TU BELLEZA
-            </h3>
-            <h4 className="text-lg sm:text-xl lg:text-2xl font-[Quicksand] font-semibold mb-1 sm:mb-2" style={{ color: '#A73249' }}>
-              MERECE CADA
-            </h4>
+            <h3 className="text-lg sm:text-xl lg:text-2xl font-[Quicksand] font-semibold mb-1" style={{ color: '#A73249' }}>TU BELLEZA</h3>
+            <h4 className="text-lg sm:text-xl lg:text-2xl font-[Quicksand] font-semibold mb-1" style={{ color: '#A73249' }}>MERECE CADA</h4>
             <p className="text-lg sm:text-xl lg:text-2xl font-[Quicksand] font-semibold flex items-center justify-center" style={{ color: '#A73249' }}>
               PIEZA <span className="ml-2">✨</span>
             </p>
@@ -99,27 +95,29 @@ const Login = () => {
         </div>
       </div>
       {/* Sección Derecha - Login Content */}
-      <div className="w-full lg:w-3/5 flex flex-col justify-center items-center px-8 sm:px-12 lg:px-16 py-8 lg:py-0 relative" style={{ backgroundColor: '#E3C6B8' }}>
-        <div className="w-full max-w-lg text-center">
+      <div className="w-full lg:w-3/5 flex justify-center items-center px-6 sm:px-10 lg:px-16 py-6" style={{ backgroundColor: '#E3C6B8' }}>
+        <div className="w-full max-w-lg flex flex-col justify-between h-full">
+          
           {/* Header */}
-          <div className="flex justify-between items-center mb-10 lg:mb-12">
+          <div className="flex justify-start items-center mb-6">
             <button
               onClick={() => navigate(-1)}
-              className="flex items-center font-[Quicksand] font-semibold hover:opacity-70 transition-opacity text-sm lg:text-base"
+              className="flex items-center font-[Quicksand] font-semibold hover:opacity-70 text-sm lg:text-base"
               style={{ color: '#3D1609' }}
             >
               <ChevronLeft size={18} className="mr-1" />
               Atrás
             </button>
           </div>
+
           {/* Content */}
-          <div className="mb-10 lg:mb-12">
+          <div className="flex-1 flex flex-col justify-center">
             {/* Title */}
-            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-[Quicksand] font-bold mb-3 lg:mb-4" style={{ color: '#3D1609' }}>
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-[Quicksand] font-bold mb-3 text-center" style={{ color: '#3D1609' }}>
               Iniciar sesión
             </h2>
             {/* Subtitle */}
-            <h3 className="text-lg sm:text-xl lg:text-2xl font-[Quicksand] font-medium mb-8 lg:mb-10" style={{ color: '#A73249' }}>
+            <h3 className="text-lg sm:text-xl lg:text-2xl font-[Quicksand] font-medium mb-6 text-center" style={{ color: '#A73249' }}>
               Únete a nuestro equipo
             </h3>
             {/* Login Form */}
@@ -163,27 +161,24 @@ const Login = () => {
                 </button>
               </div>
             </div>
+            {/* Social Login Buttons */}
+            <div className="space-y-4 my-6">
+              <AppleAuthButton />
+              <GoogleButton />
+              <FacebookAuthButton />
+            </div>
+            {/* Login Button */}
+            <button
+              onClick={handleLogin}
+              disabled={isLoading}
+              className="w-full py-4 px-4 rounded-lg font-[Quicksand] font-bold text-xl transition-all duration-300 hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed"
+              style={{ backgroundColor: '#A73249', color: '#FFFFFF' }}
+            >
+              {isLoading ? 'Iniciando sesión...' : 'Continuar'}
+            </button>
           </div>
-          {/* Social Login Buttons */}
-          <div className="space-y-4 mb-8">
-            <AppleAuthButton />
-            <GoogleButton />
-            <FacebookAuthButton />
-          </div>
-          {/* Login Button */}
-          <button
-            onClick={handleLogin}
-            disabled={isLoading}
-            className="w-full py-4 px-4 rounded-lg font-[Quicksand] font-bold text-xl transition-all duration-300 hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed"
-            style={{ 
-              backgroundColor: '#A73249',
-              color: '#FFFFFF'
-            }}
-          >
-            {isLoading ? 'Iniciando sesión...' : 'Continuar'}
-          </button>
           {/* Register Link */}
-          <p className="text-center mt-8 font-[Quicksand] text-sm" style={{ color: '#3D1609' }}>
+          <p className="text-center mt-6 font-[Quicksand] text-sm" style={{ color: '#3D1609' }}>
             ¿No tienes una cuenta?{' '}
             <button 
               onClick={handleGoToRegister}

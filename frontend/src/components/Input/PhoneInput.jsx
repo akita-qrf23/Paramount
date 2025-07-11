@@ -25,7 +25,7 @@ const PhoneInput = ({ text, value, onChange, disabled = false, required = false 
   }
   return (
     <div className="flex flex-col w-full">
-      <label className="mb-1 text-sm text-[#3D1609] font-[Nunito]">{text}</label>
+      <label className="mb-1 text-sm text-left text-[#3D1609] font-[Quicksand] font-semibold">{text}</label>
       <input 
         type="text" 
         value={formattedValue} 
@@ -34,7 +34,7 @@ const PhoneInput = ({ text, value, onChange, disabled = false, required = false 
         disabled={disabled} 
         required={required} 
         maxLength={9}
-        className={`bg-[#E8E1D8] border border-[#A73249] rounded-md px-3 py-2 outline-none text-[#3D1609] font-[Alexandria] placeholder-[#39312f] transition focus:border-[#A73249] ${disabled ? 'opacity-50 cursor-not-allowed' : ''}`}
+        className={`bg-[#E8E1D8] border border-[#A73249] rounded-md px-3 py-2 outline-none text-[#3D1609] font-[Nunito] placeholder-[#39312f] transition focus:border-[#A73249] ${disabled ? 'opacity-50 cursor-not-allowed' : ''}`}
       />
     </div>
   )

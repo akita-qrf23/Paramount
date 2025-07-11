@@ -45,7 +45,7 @@ const PergolaOnboarding = () => {
     setCurrentStep(onboardingSteps.length - 1);
   };
   const finishOnboarding = () => {
-    navigate('/main')
+    navigate('/register')
   };
   return (
     <div className="min-h-screen flex flex-col lg:flex-row">

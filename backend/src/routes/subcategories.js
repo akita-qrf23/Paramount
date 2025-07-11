@@ -10,11 +10,11 @@ const upload = multer({dest: "public/"})
 // Rutas que no requieren ningún parámetro en específico
 router.route()
     .get(subcategoriesController.getSubcategories)
-    .post(upload.single("subcategoryImage"), subcategoriesController.postSubcategories)
+    .post(upload.single("image"), subcategoriesController.postSubcategories)
 // Rutas que requieren un parámetro de id 
 router.route("/:id")
     .get(subcategoriesController.getSubcategory)
-    .put(upload.single("subcategoryImage"), subcategoriesController.putSubcategories)
+    .put(upload.single("image"), subcategoriesController.putSubcategories)
     .delete(subcategoriesController.deleteSubcategories)
 
 export default router

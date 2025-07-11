@@ -56,6 +56,7 @@ const SignUp = () => {
       ...prev,
       [name]: type === 'checkbox' ? checked : value
     }))
+    console.log(e.target.value)
   }
   const validateForm = () => {
     const { name, lastName, username, email, password, confirmPassword, phoneNumber, birthDate, DUI, userType, hireDate } = formData
@@ -154,15 +155,15 @@ const SignUp = () => {
       <div className="min-h-screen flex items-center justify-center" style={{ backgroundColor: '#E3C6B8' }}>
         <div className="text-center">
           <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-[#A73249] mx-auto mb-4"></div>
-          <p className="font-[Quicksand]" style={{ color: '#3D1609' }}>Cargando...</p>
+          <p className="font-[Quicksand] font-semibold" style={{ color: '#3D1609' }}>Cargando...</p>
         </div>
       </div>
     )
   }
   return (
-    <div className="min-h-screen flex flex-col lg:flex-row">
+    <div className="flex flex-col lg:flex-row h-screen">
       {/* Sección Izquierda - Branding */}
-      <div className="w-full lg:w-2/5 flex flex-col justify-center items-center px-6 sm:px-8 lg:px-12 py-8 lg:py-0 relative" style={{ backgroundColor: '#E8E1D8' }}>
+      <div className="w-full lg:w-2/5 h-64 lg:h-screen flex flex-col justify-center items-center px-6 sm:px-8 lg:px-12 py-8 relative" style={{ backgroundColor: '#E8E1D8' }}>
         {/* P decorativa en esquina superior izquierda */}
         <div className="absolute top-4 left-4 sm:top-6 sm:left-6 lg:top-8 lg:left-8">
           <img src={Pergola} alt="P decorativa" className="w-8 h-auto sm:w-10 lg:w-12 opacity-60 object-contain"/>
@@ -185,8 +186,8 @@ const SignUp = () => {
         </div>
       </div>
       {/* Sección Derecha - Signup Content */}
-      <div className="w-full lg:w-3/5 flex flex-col justify-center items-center px-8 sm:px-12 lg:px-16 py-8 lg:py-0 relative overflow-y-auto" style={{ backgroundColor: '#E3C6B8' }}>
-        <div className="w-full max-w-2xl">
+      <div className="w-full lg:w-3/5 h-full max-h-screen overflow-y-auto px-8 sm:px-12 lg:px-16 py-8 relative" style={{ backgroundColor: '#E3C6B8' }}>
+        <div className="w-full max-w-2xl mx-auto pb-8">
           {/* Header */}
           <div className="flex justify-between items-center mb-8 lg:mb-10">
             <button
@@ -198,7 +199,6 @@ const SignUp = () => {
               Atrás
             </button>
           </div>
-
           {/* Content */}
           <div className="mb-8 lg:mb-10">
             {/* Title */}
@@ -207,9 +207,8 @@ const SignUp = () => {
             </h2>
             {/* Subtitle */}
             <h3 className="text-lg sm:text-xl lg:text-2xl font-[Quicksand] font-medium mb-8 lg:mb-10 text-center" style={{ color: '#A73249' }}>
-              Registro de Empleado
+              Crea una cuenta
             </h3>
-
             {/* Registration Form */}
             <div className="space-y-6">
               {/* Información Personal */}
@@ -233,7 +232,6 @@ const SignUp = () => {
                   required
                 />
               </div>
-
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <TextInput
                   text="Nombre de Usuario *"
@@ -253,7 +251,6 @@ const SignUp = () => {
                   required
                 />
               </div>
-
               {/* Fechas */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <DateInput
@@ -275,7 +272,6 @@ const SignUp = () => {
                   required
                 />
               </div>
-
               {/* Información de Contacto */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <TextInput
@@ -297,7 +293,6 @@ const SignUp = () => {
                   required
                 />
               </div>
-
               {/* Contraseñas */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <PasswordInput
@@ -319,7 +314,6 @@ const SignUp = () => {
                   required
                 />
               </div>
-
               {/* Tipo de Usuario */}
               <SelectInput
                 text="Tipo de Usuario *"
@@ -331,13 +325,12 @@ const SignUp = () => {
                 disabled={isLoading}
                 required
               />
-
               {/* Información sobre roles */}
-              <div className="bg-white/30 rounded-lg p-4 border border-white/50">
-                <h4 className="font-[Quicksand] font-semibold mb-2" style={{ color: '#3D1609' }}>
+              <div className="bg-white/30 rounded-lg p-4 border border-white/50 font-[Quicksand]">
+                <h4 className=" font-semibold mb-2" style={{ color: '#3D1609' }}>
                   ℹ️ Información sobre roles:
                 </h4>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm font-semibold">
                   <div>
                     <strong style={{ color: '#A73249' }}>Colaborador:</strong>
                     <p style={{ color: '#3D1609' }}>
@@ -360,10 +353,10 @@ const SignUp = () => {
                   name="isVerified"
                   checked={formData.isVerified}
                   onChange={handleInputChange}
-                  className="w-4 h-4 rounded focus:ring-2"
-                  style={{ accentColor: '#A73249' }}
+                  className="w-4 h-4 rounded"
+                  style={{ accentColor: '#A73249', borderColor: '#A73249', }}
                 />
-                <label className="text-sm font-[Quicksand]" style={{ color: '#3D1609' }}>
+                <label className="text-sm font-[Quicksand] font-medium" style={{ color: '#3D1609' }}>
                   Marcar como empleado verificado (recomendado para empleados de confianza)
                 </label>
               </div>
@@ -373,7 +366,7 @@ const SignUp = () => {
           <button
             onClick={handleSubmit}
             disabled={isLoading}
-            className="w-full py-4 px-4 rounded-lg font-[Quicksand] font-bold text-xl transition-all duration-300 hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed mb-6"
+            className="w-full py-4 px-4 rounded-lg font-[Quicksand] font-bold text-xl transition-all duration-300 hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed mt-6"
             style={{ 
               backgroundColor: '#A73249',
               color: '#FFFFFF'
@@ -385,11 +378,11 @@ const SignUp = () => {
                 Registrando...
               </div>
             ) : (
-              'Registrar Empleado'
+              'Registrarse'
             )}
           </button>
           {/* Login Link */}
-          <p className="text-center font-[Quicksand] text-sm" style={{ color: '#3D1609' }}>
+          <p className="text-center font-[Quicksand] text-sm mt-6" style={{ color: '#3D1609' }}>
             ¿Ya tienes una cuenta?{' '}
             <button 
               onClick={handleGoToLogin}

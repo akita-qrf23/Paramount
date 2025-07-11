@@ -4,10 +4,8 @@ import { AuthProvider } from './context/AuthContext'
 import ForgotPassword from './pages/ForgotPassword'
 import VerifyCode from './pages/VerifyCode'
 import ResetPassword from './pages/ResetPassword'
-import ProtectedRoute from './components/Auth/ProtectedRoute'
 import PergolaOnboarding from './pages/onBoarding'
 import Login from './pages/Login'
-import MainPage from './pages/MainPage'
 import SignUp from './pages/Signup'
 
 function App() {
@@ -47,7 +45,6 @@ function App() {
           <Route path="/verify-code" element={<VerifyCode/>}/>
           <Route path="/reset-password" element={<ResetPassword/>}/>
           {/* Rutas protegidas */}
-          <Route  path="/main" element={<ProtectedRoute><MainPage/></ProtectedRoute>}/>  
           <Route path="*" element={<Navigate to="/" replace/>}/>
         </Routes>
       </div>
