@@ -1,14 +1,14 @@
-const SelectInput = ({ text, value, onChange, options, placeholder, disabled = false, required = false }) => {
+const SelectInput = ({ text, name, value, onChange, options, placeholder, disabled = false, required = false }) => {
   return (
     <div className="flex flex-col w-full">
       <label className="mb-1 text-sm text-left text-[#3D1609] font-[Quicksand] font-semibold">{text}</label>
       <select 
+        name={name}
         value={value} 
         onChange={onChange} 
         disabled={disabled} 
         required={required} 
-        className={`bg-[#E8E1D8] border border-[#A73249] rounded-md px-3 py-2 outline-none text-[#3D1609] font-[Nunito] transition focus:border-[#A73249] ${disabled ? 'opacity-50 cursor-not-allowed' : ''}`}
-      >
+        className={`w-full bg-[#E8E1D8] border border-[#A73249] rounded-md px-3 py-2 pr-8 outline-none text-[#3D1609] font-[Nunito] transition focus:border-[#A73249] focus:ring-2 focus:ring-[#A73249]/20 appearance-none cursor-pointer${disabled ? 'opacity-50 cursor-not-allowed' : 'hover:border-[#50352C]'}`}>
         <option value="">{placeholder}</option>
         {options.map((option) => (
           <option key={option.value} value={option.value}>
@@ -16,6 +16,12 @@ const SelectInput = ({ text, value, onChange, options, placeholder, disabled = f
           </option>
         ))}
       </select>
+      {/* Flecha personalizada */}
+      <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
+        <svg className="w-4 h-4 text-[#A73249]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7"/>
+        </svg>
+      </div>
     </div>
   )
 }

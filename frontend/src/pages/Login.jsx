@@ -148,13 +148,13 @@ const Login = () => {
                     className="mr-3 w-5 h-5 rounded"
                     style={{ accentColor: '#A73249' }}
                   />
-                  <span className="font-[Quicksand] text-sm" style={{ color: '#3D1609' }}>
+                  <span className="font-[Quicksand] text-sm font-medium" style={{ color: '#3D1609' }}>
                     Mantenerme conectado
                   </span>
                 </label>
                 <button 
                   onClick={() => navigate('/forgot-password')}
-                  className="font-[Quicksand] text-sm underline hover:opacity-70" 
+                  className="font-[Quicksand] text-sm font-medium underline hover:opacity-70" 
                   style={{ color: '#A73249' }}
                 >
                   ¿Olvidaste tu contraseña?
@@ -178,7 +178,7 @@ const Login = () => {
             </button>
           </div>
           {/* Register Link */}
-          <p className="text-center mt-6 font-[Quicksand] text-sm" style={{ color: '#3D1609' }}>
+          <p className="text-center mt-6 font-[Quicksand] font-medium text-sm" style={{ color: '#3D1609' }}>
             ¿No tienes una cuenta?{' '}
             <button 
               onClick={handleGoToRegister}
