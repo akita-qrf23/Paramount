@@ -42,7 +42,8 @@ export const useConditionalData = () => {
     collections: [],
     products: [],
     rawmaterials: [],
-    reviews: []
+    reviews: [],
+    customdesigns: []
   }
   return {
     suppliersData: canAccess('suppliers') ? allSuppliersData : emptyData,
@@ -52,6 +53,7 @@ export const useConditionalData = () => {
     productsData: canAccess('products') ? allProductsData : emptyData,
     rawmaterialsData: canAccess('rawmaterials') ? allRawMaterialsData : emptyData,
     reviewsData: canAccess('reviews') ? allReviewsData : emptyData,
+    customdesignsData: canAccess('customdesigns') ? allCustomDesignsData : emptyData,
     canAccess
   }
 }

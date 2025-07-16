@@ -113,7 +113,7 @@ const MainPage = () => {
         return (
           <div className="p-6 bg-white min-h-screen">
             <div className="max-w-7xl mx-auto">
-              <TableContainer config={rawMaterialsConfig} {...rawmaterialsData.createHandlers(API)} onExport={handleDataExport}/>
+              <TableContainer config={rawMaterialsConfig} {...rawmaterialsData.createHandlers(API)} onExport={handleDataExport} suppliersData={suppliersData}/>
             </div>
           </div>
         )
@@ -121,7 +121,15 @@ const MainPage = () => {
         return (
           <div className="p-6 bg-white min-h-screen">
             <div className="max-w-7xl mx-auto">
-              <TableContainer config={reviewsConfig} {...reviewsData.createHandlers(API)} onExport={(format, data) => handleDataExport(format, data, 'Reseñas')} customersData={customersData} articlesData={articlesData} artPiecesData={artPiecesData}/>
+              <TableContainer config={reviewsConfig} {...reviewsData.createHandlers(API)} onExport={handleDataExport} customersData={customersData} productsData={productsData}/>
+            </div>
+          </div>
+        )
+      case 'customdesigns':
+        return (
+          <div className="p-6 bg-white min-h-screen">
+            <div className="max-w-7xl mx-auto">
+              <TableContainer config={customDesignsConfig} {...customDesignsData.createHandlers(API)} onExport={handleDataExport}/>
             </div>
           </div>
         )
