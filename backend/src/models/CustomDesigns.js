@@ -19,6 +19,7 @@ const customDesignsSchema = new Schema({
         type: String,
         required: [true, "El código de solicitud es obligatorio"],
         trim: true,
+        unique: true,
         minlength: [5, "El código debe tener al menos 5 caracteres"]
     },
     piece: {
@@ -30,9 +31,9 @@ const customDesignsSchema = new Schema({
         }
     },
     base: {
-        type: Schema.Types.ObjectId,
-        ref: "DesignElement",
-        required: [true, "La base es obligatoria"]
+        type: String,
+        required: [true, "La base es obligatoria"],
+        trim: true
     },
     baseLength: {
         type: String,
@@ -45,14 +46,14 @@ const customDesignsSchema = new Schema({
         }
     },
     decoration: [{
-        type: Schema.Types.ObjectId,
-        ref: "DesignElement",
-        required: true
+        type: String,
+        required: true,
+        trim: true
     }],
     clasp: {
-        type: Schema.Types.ObjectId,
-        ref: "DesignElement",
-        required: [true, "El cierre es obligatorio"]
+        type: String,
+        required: [true, "El cierre es obligatorio"],
+        trim: true
     },
     customerComments: {
         type: String,
