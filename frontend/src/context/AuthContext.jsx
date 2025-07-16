@@ -179,13 +179,13 @@ export const AuthProvider = ({ children }) => {
           console.log("📭 No se encontro ningún usuario guardado")
         }
       } catch (error) {
-        console.error("❌ Error checking auth:", error)
+        console.error("❌ Error revisando autenticación:", error)
         // En caso de error, limpiar datos locales
         localStorage.removeItem("user")
         setUser(null)
         setAuthCookie(null)
       } finally {
-        console.log("✅ Initial auth check complete")
+        console.log("✅ Comprobación de autenticación inicial completada")
         setIsLoading(false)
       }
     }

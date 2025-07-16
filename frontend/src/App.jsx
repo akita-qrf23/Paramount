@@ -17,21 +17,22 @@ function App() {
           toastOptions={{
             duration: 2000,
             style: {
-              background: '#EBFEF5',
-              color: '#7A6E6E',
-              border: '1px solid #81B29A',
-              fontFamily: 'Alexandria'
+              background: '#E8E1D8',
+              color: '#3D1609',
+              border: '1px solid #A73249',
+              fontFamily: 'Nunito',
+              fontWeight: '600'
             },
             success: {
               iconTheme: {
-                primary: '#E07A5F',
-                secondary: '#EBFEF5'
+                primary: '#59FF00',
+                secondary: '#E8E1D8'
               },
             },
             error: {
               iconTheme: {
                 primary: '#EF4444',
-                secondary: '#EBFEF5'
+                secondary: '#E8E1D8'
               }
             }
           }}

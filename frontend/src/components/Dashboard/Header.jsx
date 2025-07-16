@@ -1,4 +1,4 @@
-import { Bell, User } from 'lucide-react'
+import { Bell } from 'lucide-react'
 import { useAuth } from '../../hooks/useAuth.js'
 
 const Header = () => {
@@ -29,29 +29,29 @@ const Header = () => {
     return roleMap[user.userType] || 'Empleado'
   }
   return (
-    <div className="bg-[#E3C6B8] px-6 py-4 flex items-center justify-between font-[Quicksand] font-bold border-b border-[#7A6E6E]/10 shadow-sm">
+    <div className="bg-[#E3C6B8] px-6 py-4 flex items-center justify-between font-[Quicksand] border-b border-[#3D1609]/10 shadow-sm">
       {/* Lado izquierdo - Saludo y estadisticas */}
       <div className="flex-1">
-        <h1 className="text-xl font-bold text-[#7A6E6E] mb-1">Bienvenido de vuelta, {getDisplayName()}</h1>
-        <p className="text-sm text-[#7A6E6E]/70">¡Aquí están las estadísticas del inventario de la tienda en línea!</p>
+        <h1 className="text-xl font-bold text-[#3D1609] mb-1">Bienvenido de vuelta, {getDisplayName()}</h1>
+        <p className="text-sm text-[#3D1609]/70">¡Aquí están las estadísticas del inventario de la tienda en línea!</p>
       </div>
       {/* Lado derecho - Notificaciones y perfil */}
       <div className="flex items-center space-x-4">
         {/* Notificaciones */}
         <div className="relative">
-          <button className="p-3 rounded-full hover:bg-[#7A6E6E]/10 transition-colors duration-200 relative group">
-            <Bell className="w-6 h-6 text-[#7A6E6E] group-hover:text-[#7A6E6E]/80" />
+          <button className="p-3 rounded-full hover:bg-[#3D1609]/10 transition-colors duration-200 relative group">
+            <Bell className="w-6 h-6 text-[#3D1609] group-hover:text-[#3D1609]/80" />
             {/* Badge de notificación */}
             <span className="absolute -top-1 -right-1 w-5 h-5 bg-red-500 text-white text-xs rounded-full flex items-center justify-center font-medium animate-pulse">2</span>
           </button>
         </div>
         {/* Separador vertical */}
-        <div className="w-px h-8 bg-[#7A6E6E]/20"></div>
+        <div className="w-px h-8 bg-[#3D1609]/20"></div>
         {/* Perfil de usuario */}
         <div className="flex items-center space-x-3">
           <div className="text-right">
-            <div className="text-sm font-semibold text-[#7A6E6E]">{getDisplayName()}</div>
-            <div className="text-xs text-[#7A6E6E]/70">{getUserRole()}</div>
+            <div className="text-sm font-semibold text-[#3D1609]">{getDisplayName()}</div>
+            <div className="text-xs text-[#3D1609]/70">{getUserRole()}</div>
           </div>
           {/* Avatar */}
           <div className="relative group cursor-pointer">
