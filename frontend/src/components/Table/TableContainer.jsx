@@ -121,6 +121,14 @@ const TableContainer = ({config, data = [], onAdd, onEdit, onDelete, onExport, i
       if (column.key === 'rawMaterialsUsed') {
         return value.map(m => `${m.name || ''} ${m.description || ''} ${m.correlative || ''}`).join(' ').toLowerCase()
       }
+      // Para reseñas: buscar en cliente y calificación
+      if (column.key === 'reviews') {
+        return `${item.customer.username || ''} ${item.rating || ''}`.toLowerCase()
+      }
+      // Para diseños únicos: buscar en todos los campos
+      if (column.key === 'customdesigns') {
+        return `${value.codeRequest || ''} ${value.piece || ''} ${value.base || ''} ${value.baseLength || ''} ${value.decoration || ''} ${value.clasp || ''} ${value.customerComments || ''}`.toLowerCase()
+      }
       // Valor por defecto para objetos
       return Object.values(value).join(' ').toLowerCase()
     }
@@ -282,7 +290,8 @@ const TableContainer = ({config, data = [], onAdd, onEdit, onDelete, onExport, i
         'colecciones': 'collections',
         'proveedores': 'suppliers',
         'materiasprimas': 'rawmaterials',
-        'reseñas': 'reviews'
+        'reseñas': 'reviews',
+        'diseñosunicos': 'customdesigns'
       }
       modalType = typeMapping[normalizedTitle] || normalizedTitle
     }

@@ -41,11 +41,26 @@ const useDataCategories = () => {
     loading,
     onAdd: async (data) => {
       try {
+        // Usar FormData si hay imagen
+        let body
+        let headers = { credentials: "include" }
+
+        if (data.image && data.image instanceof File) {
+          const formData = new FormData()
+          Object.keys(data).forEach(key => {
+            formData.append(key, data[key])
+          })
+          body = formData
+          // No se establece el Content-Type para FormData, dejar que el navegador lo establezca
+        } else {
+          headers["Content-Type"] = "application/json"
+          body = JSON.stringify(data)
+        }
         const response = await fetch(`${API}/categories`, {
           method: "POST",
-          headers: { "Content-Type": "application/json" },
+          headers,
           credentials: "include",
-          body: JSON.stringify(data)
+          body
         })
         if (!response.ok) {
           const errorData = await response.json()
@@ -60,11 +75,26 @@ const useDataCategories = () => {
       }
     }, onEdit: async (id, data) => {
       try {
+        // Usar FormData si hay imagen
+        let body
+        let headers = { credentials: "include" }
+
+        if (data.image && data.image instanceof File) {
+          const formData = new FormData()
+          Object.keys(data).forEach(key => {
+            formData.append(key, data[key])
+          })
+          body = formData
+          // No se establece el Content-Type para FormData, dejar que el navegador lo establezca
+        } else {
+          headers["Content-Type"] = "application/json"
+          body = JSON.stringify(data)
+        }
         const response = await fetch(`${API}/categories/${id}`, {
           method: "PUT",
-          headers: { "Content-Type": "application/json" },
+          headers,
           credentials: "include",
-          body: JSON.stringify(data)
+          body
         })
         if (!response.ok) {
           const errorData = await response.json()

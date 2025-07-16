@@ -9,7 +9,7 @@ import SettingsPage from '../components/Settings/SettingsPage'
 import ProgressScreen from '../components/Misc/ProgressScreen'
 import { useConditionalData } from '../hooks/MainHook/useConditionalData.js'
 // Importar configuraciones de tablas
-import { suppliersConfig, categoriesConfig, subcategoriesConfig, collectionsConfig, productsConfig, rawMaterialsConfig, reviewsConfig } from '../data/TableConfigs.js'
+import { suppliersConfig, categoriesConfig, subcategoriesConfig, collectionsConfig, productsConfig, rawMaterialsConfig, reviewsConfig, customDesignsConfig} from '../data/TableConfigs.js'
 
 const MainPage = () => {
   const { user, logout, API } = useAuth()
@@ -23,6 +23,7 @@ const MainPage = () => {
     productsData,
     rawmaterialsData,
     reviewsData,
+    customDesignsData,
     canAccess
   } = useConditionalData()
 

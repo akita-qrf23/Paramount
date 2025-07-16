@@ -6,6 +6,7 @@ import useDataSuppliers from '../SuppliersHooks/useDataSuppliers'
 import useDataProducts from '../productsHooks/useDataProducts'
 import useDataRawMaterials from '../rawMaterialsHooks/useDataRawMaterials'
 import useDataReviews from '../ReviewsHooks/useDataReviews'
+import useDataCustomDesigns from '../CustomDesignsHooks/useDataCustomDesigns'
 
 export const useConditionalData = () => {
   const { user } = useAuth()
@@ -17,6 +18,7 @@ export const useConditionalData = () => {
   const allProductsData = useDataProducts()
   const allRawMaterialsData = useDataRawMaterials()
   const allReviewsData = useDataReviews()
+  const allCustomDesignsData = useDataCustomDesigns()
   
   const canAccess = (section) => {
     if (!user?.userType) return false

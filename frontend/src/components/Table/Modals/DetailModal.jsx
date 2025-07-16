@@ -1,4 +1,4 @@
-import { Package, Tag, DollarSign, Star, Hash, FileText, Eye, Image, Layers, Building, Boxes, MessageSquare, CheckCircle, XCircle, Archive, Palette, Calendar, User, Mail, Phone, MapPin } from 'lucide-react'
+import { Package, Tag, DollarSign, Star, Hash, FileText, Eye, Image, Layers, Building, Boxes, MessageSquare, CheckCircle, XCircle, Gem, Archive, Palette, Calendar, User, Mail, Phone, MapPin, Ruler, Paintbrush, Link } from 'lucide-react'
 import BaseModal from './BaseModal'
 
 const DetailModal = ({ isOpen, onClose, data, title = "Detalles", type = "generic" }) => {
@@ -82,6 +82,7 @@ const DetailModal = ({ isOpen, onClose, data, title = "Detalles", type = "generi
       // Texto y descripciones
       description: FileText,
       comment: MessageSquare,
+      customerComments: MessageSquare,
       response: MessageSquare,
       // Imágenes
       image: Image,
@@ -89,7 +90,14 @@ const DetailModal = ({ isOpen, onClose, data, title = "Detalles", type = "generi
       // Estados
       isActive: CheckCircle,
       // Genérico
-      default: Eye
+      default: Eye,
+      // Diseños únicos
+      codeRequest: Hash,
+      piece: Gem,
+      base: Gem,
+      baseLength: Ruler,
+      decoration: Paintbrush,
+      clasp: Link
     }
     return iconMap[fieldKey] || iconMap.default
   }
@@ -202,6 +210,20 @@ const DetailModal = ({ isOpen, onClose, data, title = "Detalles", type = "generi
             { key: 'response', label: 'Respuesta', type: 'text' },
             { key: 'createdAt', label: 'Fecha de la Reseña', type: 'date' },
             { key: 'updatedAt', label: 'Última Actualización', type: 'date' }
+          ]
+        }
+      case 'customDesigns':
+        return {
+          fields: [
+            { key: 'codeRequest', label: 'Código de Solicitud', type: 'text' },
+            { key: 'piece', label: 'Pieza', type: 'text' },
+            { key: 'base', label: 'Base', type: 'text'},
+            { key: 'baseLength', label: 'Longitud de Base', type: 'text' },
+            { key: 'decoration', label: 'Decoración', type: 'text' },
+            { key: 'clasp', label: 'Cierre', type: 'text' },
+            { key: 'customerComments', label: 'Comentarios del Cliente', type: 'text' },
+            { key: 'createdAt', label: 'Fecha de solicitud', type: 'date' },
+            { key: 'updatedAt', label: 'Fecha de actualización', type: 'date' },
           ]
         }
       default:

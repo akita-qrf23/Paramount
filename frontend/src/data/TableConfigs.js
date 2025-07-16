@@ -239,3 +239,33 @@ export const reviewsConfig = {
     { key: 'response', type: 'textarea', label: 'Respuesta', required: false, placeholder: 'Escribe una respuesta...', rows: 4, maxlength: 50 }
   ]
 }
+// Configuración para diseños únicos
+export const customDesignsConfig = {
+  title: "Diseños únicos",
+  columns: [
+    { key: 'codeRequest', label: 'Código de Solicitud', sortable: true, searchable: true },
+    { key: 'piece', label: 'Pieza', sortable: true, searchable: true },
+    { key: 'base', label: 'Base', sortable: true, searchable: true },
+    { key: 'baseLength', label: 'Longitud de Base', sortable: true, searchable: true },
+    { key: 'decoration', label: 'Decoración', sortable: true, searchable: true },
+    { key: 'clasp', label: 'Cierre', sortable: true, searchable: true },
+    { key: 'customerComments', label: 'Comentarios del Cliente', searchable: true },
+    { key: 'createdAt', label: 'Fecha', sortable: true, type: 'date' }
+  ],
+  actions: {
+    canAdd: true,
+    canEdit: true,
+    canDelete: true,
+    canExport: true,
+    canView: true
+  },
+  formFields: [
+    { name: 'codeRequest', type: 'text', label: 'Código de Solicitud', required: true, placeholder: 'Ej: D-001' },
+    { name: 'piece', type: 'text', label: 'Pieza', required: true, placeholder: 'Ej: Pulsera' },
+    { name: 'base', type: 'text', label: 'Base', required: true, placeholder: 'Ej: metal' },
+    { name: 'baseLength', type: 'text', label: 'Longitud de Base', required: true, placeholder: 'Ej: 10 cm' },
+    { name: 'decoration', type: 'text', label: 'Decoración', required: true, placeholder: 'Ej: pulsera' },
+    { name: 'clasp', type: 'text', label: 'Cierre', required: true, placeholder: 'Ej: clasp' },
+    { name: 'customerComments', type: 'textarea', label: 'Comentarios del Cliente', required: true, placeholder: 'Ej: excelente diseño' }
+  ]
+}
