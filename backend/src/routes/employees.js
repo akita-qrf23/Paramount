@@ -8,7 +8,7 @@ const router = express.Router()
 // Especificamos que los archivos multimedia se guarden en la carpeta public
 const upload = multer({dest: "public/"})
 // Rutas que no requieren ningún parámetro en específico
-router.route()
+router.route("/")
     .get(employeesController.getEmployees)
     .post(upload.single("employeeImage"), employeesController.postEmployees)
 // Rutas que requieren un parámetro de id 

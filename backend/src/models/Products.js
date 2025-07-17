@@ -71,7 +71,11 @@ const productsSchema = new Schema({
     images: {
         type: [String],
         validate: {
-            validator: v => v.every(img => /^https?:\/\/.+\.(jpg|jpeg|png|webp|svg)$/.test(img)),
+            validator: function(v) {
+                // Solo valida si el campo tiene un valor y no está vacío
+                if (!v || v.length === 0) return true;
+                return v.every(img => img && img.trim() !== '' && /^https?:\/\/.+\.(jpg|jpeg|png|webp|svg)$/.test(img));
+            },
             message: "Todas las URLs de imágenes deben ser válidas"
         }
     },

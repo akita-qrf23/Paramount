@@ -5,7 +5,7 @@ import rawMaterialsController from "../controllers/rawMaterialsController.js"
 
 const router = express.Router()
 // Rutas que no requieren ningún parámetro en específico
-router.route()
+router.route("/")
     .get(rawMaterialsController.getRawMaterials)
     .post(rawMaterialsController.postRawMaterials)
 // Rutas que requieren un parámetro de id 

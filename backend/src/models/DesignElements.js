@@ -34,9 +34,11 @@ const designElementSchema = new Schema({
         required: [true, "La URL de la imagen es obligatoria"],
         validate: {
             validator: function(v) {
-                return /^https?:\/\/.+\.(jpg|jpeg|png|webp|svg)$/.test(v)
+                // Solo valida si el campo tiene un valor y no está vacío
+                if (!v || v.trim() === '') return true;
+                return /^https?:\/\/.+\.(jpg|jpeg|png|webp|svg)$/.test(v);
             },
-            message: "La URL de imagen debe ser válida y terminar en .jpg, .png, .webp o .svg"
+            message: "La URL de imagen debe ser válida"
         }
     }
 }, {

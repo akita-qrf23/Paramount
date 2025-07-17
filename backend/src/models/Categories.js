@@ -28,7 +28,11 @@ const categoriesSchema = new Schema({
     image: {
         type: String,
         validate: {
-            validator: v => /^https?:\/\/.+\.(jpg|jpeg|png|webp|svg)$/.test(v),
+            validator: function(v) {
+                // Solo valida si el campo tiene un valor y no está vacío
+                if (!v || v.trim() === '') return true;
+                return /^https?:\/\/.+\.(jpg|jpeg|png|webp|svg)$/.test(v);
+            },
             message: "La URL de imagen debe ser válida"
         }
     },

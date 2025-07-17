@@ -5,7 +5,7 @@ import suppliersController from "../controllers/suppliersController.js"
 
 const router = express.Router()
 // Rutas que no requieren ningún parámetro en específico
-router.route()
+router.route("/")
     .get(suppliersController.getSuppliers)
     .post(suppliersController.postSuppliers)
 // Rutas que requieren un parámetro de id 
