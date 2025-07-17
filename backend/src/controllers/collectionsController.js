@@ -20,10 +20,10 @@ collectionsController.postCollections = async (req, res) => {
         if (req.file) {
             const result = await cloudinary.uploader.upload(req.file.path, {
                 folder: "collections",
-                allowed_formats: ["jpg", "jpeg", "png", "gif"],
+                allowed_formats: ["jpg", "jpeg", "png", "gif", "webp"],
             })
             imageURL = result.secure_url
-        }
+        } 
         const newCollection = new Collections({ name, description, image: imageURL, isActive });
         // Guardar colección
         await newCollection.save();

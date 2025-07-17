@@ -5,13 +5,13 @@ import multer from "multer"
 import productsController from "../controllers/productsController.js"
 
 const router = express.Router();
-// Especificamos que los archivos multimedia se guarden en la carpeta public, incluyendo el límite de tamaño de los archivos
+// Especificamos que los archivos multimedia se guarden en la carpeta products, incluyendo el límite de tamaño de los archivos
 const upload = multer({
     dest: "products/",
     limits: {
         fileSize: 5 * 1024 * 1024, 
     },
-    fileFilter: (file, cb) => {
+    fileFilter: (req, file, cb) => {
         // Validar tipo de archivo
         if (file.mimetype.startsWith('image/')) {
             cb(null, true);

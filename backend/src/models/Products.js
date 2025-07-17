@@ -106,7 +106,11 @@ const productsSchema = new Schema({
     correlative: {
         type: String,
         required: [true, "El correlativo es obligatorio"],
-        trim: true
+        trim: true,
+        validate: {
+            validator: v => v.trim() !== '', // Asegurarse de que no sea una cadena vacía
+            message: "El correlativo no puede estar vacío"
+        }
     },
     movementType: {
         type: String,
@@ -114,6 +118,10 @@ const productsSchema = new Schema({
         enum: {
             values: ["venta", "exhibición", "producción", "otro"],
             message: "Tipo de movimiento no válido"
+        },
+        validate: {
+            validator: v => v.trim() !== '', // Asegurarse de que no sea una cadena vacía
+            message: "El tipo de movimiento no puede estar vacío"
         }
     },
     status: {
@@ -122,11 +130,19 @@ const productsSchema = new Schema({
         enum: {
             values: ["disponible", "agotado", "en producción", "descontinuado"],
             message: "Estado no válido"
+        },
+        validate: {
+            validator: v => v.trim() !== '', // Asegurarse de que no sea una cadena vacía
+            message: "El estado no puede estar vacío"
         }
     },
     applicableCosts: {
         type: String,
-        trim: true
+        trim: true,
+        validate: {
+            validator: v => v.trim() !== '', // Asegurarse de que no sea una cadena vacía
+            message: "Los costos aplicables no puede estar vacíos"
+        }
     },
     hasDiscount: {
         type: Boolean,

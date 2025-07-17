@@ -27,7 +27,8 @@ const Login = () => {
     }
   }, [user, authLoading, navigate, location])
 
-  const handleLogin = async () => {
+  const handleLogin = async (e) => {
+    e.preventDefault()
     // Validaciones
     if (!email || !password) {
       toast.error('Por favor completa todos los campos')
@@ -121,7 +122,7 @@ const Login = () => {
               Únete a nuestro equipo
             </h3>
             {/* Login Form */}
-            <div className="space-y-6">
+            <form onSubmit={handleLogin} className="space-y-6">
               <TextInput
                 text="Correo electrónico:"
                 type="email"
@@ -160,22 +161,22 @@ const Login = () => {
                   ¿Olvidaste tu contraseña?
                 </button>
               </div>
-            </div>
-            {/* Social Login Buttons */}
-            <div className="space-y-4 my-6">
-              <AppleAuthButton />
-              <GoogleButton />
-              <FacebookAuthButton />
-            </div>
-            {/* Login Button */}
-            <button
-              onClick={handleLogin}
-              disabled={isLoading}
-              className="w-full py-4 px-4 rounded-lg font-[Quicksand] font-bold text-xl transition-all duration-300 hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed"
-              style={{ backgroundColor: '#A73249', color: '#FFFFFF' }}
-            >
-              {isLoading ? 'Iniciando sesión...' : 'Continuar'}
-            </button>
+              {/* Social Login Buttons */}
+              <div className="space-y-4 my-6">
+                <AppleAuthButton />
+                <GoogleButton />
+                <FacebookAuthButton />
+              </div>
+              {/* Login Button */}
+              <button
+                type="submit"
+                disabled={isLoading}
+                className="w-full py-4 px-4 rounded-lg font-[Quicksand] font-bold text-xl transition-all duration-300 hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed"
+                style={{ backgroundColor: '#A73249', color: '#FFFFFF' }}
+              >
+                {isLoading ? 'Iniciando sesión...' : 'Continuar'}
+              </button>
+            </form>
           </div>
           {/* Register Link */}
           <p className="text-center mt-6 font-[Quicksand] font-medium text-sm" style={{ color: '#3D1609' }}>

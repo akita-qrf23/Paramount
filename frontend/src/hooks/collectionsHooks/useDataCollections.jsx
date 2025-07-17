@@ -66,6 +66,7 @@ const useDataCollections = () => {
           const errorData = await response.json()
           throw new Error(errorData.message || "Error al registrar colección")
         }
+        const result = await response.json()
         toast.success('Colección registrada exitosamente')
         fetchCollections()
       } catch (error) {

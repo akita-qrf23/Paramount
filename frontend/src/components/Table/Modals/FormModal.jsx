@@ -7,6 +7,7 @@ const FormModal = ({isOpen, onClose, onSubmit, title, fields, initialData = {}, 
   const [showPasswords, setShowPasswords] = useState({})
   const [imagePreviews, setImagePreviews] = useState({})
   const [imageArrays, setImageArrays] = useState({})
+  const [selectedFiles, setSelectedFiles] = useState({})
   // Configurar react-hook-form
   const { register, handleSubmit, formState: { errors }, reset, watch, setValue } = useForm({
     mode: 'onChange', // Validar en tiempo real
@@ -204,7 +205,10 @@ const FormModal = ({isOpen, onClose, onSubmit, title, fields, initialData = {}, 
         return (
           <div className="space-y-3">
             <div className="relative">
-              <input {...register(field.name, validation)} type="file" accept="image/*" className="hidden" id={`image-${field.name}`} disabled={isLoading} onChange={(e) => { handleImagePreview(field.name, e.target.files, false) }}/>
+              <input type="file" accept="image/*" className="hidden" id={`image-${field.name}`} disabled={isLoading} onChange={(e) => { const files = e.target.files
+                const file = files[0] || null
+                handleImagePreview(field.name, files, false)
+                setSelectedFiles(prev => ({ ...prev, [field.name]: file }))}}/>
               <label htmlFor={`image-${field.name}`} className={`${baseInputClasses} cursor-pointer flex items-center justify-center space-x-2 hover:bg-gray-50 min-h-[100px]`}>
                 {imagePreviews[field.name] ? (
                   <div className="flex flex-col items-center space-y-2">
@@ -286,9 +290,13 @@ const FormModal = ({isOpen, onClose, onSubmit, title, fields, initialData = {}, 
     const processedData = { ...data }
     // Procesar archivos e imágenes
     fields.forEach(field => {
-      if (field.type === 'image' && data[field.name]) {
-        if (data[field.name] instanceof FileList) {
-          processedData[field.name] = data[field.name][0] || null
+      if (field.type === 'image') {
+        // Usar el archivo del estado separado
+        const file = selectedFiles[field.name]
+        if (file && file instanceof File) {
+          processedData[field.name] = file
+        } else {
+          delete processedData[field.name]
         }
       } else if (field.type === 'imageArray' && imageArrays[field.name]) {
         processedData[field.name] = imageArrays[field.name]
