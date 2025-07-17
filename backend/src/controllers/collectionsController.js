@@ -4,7 +4,6 @@ import Collections from "../models/Collections.js";
 // Archivo config y librería cloudinary
 import { v2 as cloudinary } from 'cloudinary'
 import { config } from "../utils/config.js"
-import { Collection } from "mongoose";
 
 cloudinary.config({
     cloud_name: config.CLOUDINARY.CLOUD_NAME,
@@ -65,7 +64,7 @@ collectionsController.getCollection = async (req, res) => {
     }
 };
 // UPDATE (PUT)
-collectionsController.putCategories = async (req, res) => {
+collectionsController.putCollections = async (req, res) => {
     try {
         const { name, description, isActive } = req.body;
         // Link de imagen

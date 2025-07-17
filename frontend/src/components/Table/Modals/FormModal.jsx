@@ -153,10 +153,10 @@ const FormModal = ({isOpen, onClose, onSubmit, title, fields, initialData = {}, 
     const hasError = errors[field.name]
     const validation = getValidationRules(field)
 
-    const baseInputClasses = `w-full px-3 py-2 border rounded-lg font-[Alexandria] transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-[#E07A5F] ${
+    const baseInputClasses = `w-full px-3 py-2 border rounded-lg font-[Quicksand] transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-[#A73249] ${
       hasError 
         ? 'border-red-300 bg-red-50 focus:border-red-500' 
-        : 'border-gray-300 bg-white focus:border-[#E07A5F]'
+        : 'border-gray-300 bg-white focus:border-[#A73249]'
     }`
     switch (field.type) {
       case 'textarea':
@@ -208,7 +208,7 @@ const FormModal = ({isOpen, onClose, onSubmit, title, fields, initialData = {}, 
               <label htmlFor={`image-${field.name}`} className={`${baseInputClasses} cursor-pointer flex items-center justify-center space-x-2 hover:bg-gray-50 min-h-[100px]`}>
                 {imagePreviews[field.name] ? (
                   <div className="flex flex-col items-center space-y-2">
-                    <img src={imagePreviews[field.name]} alt="Preview" className="w-20 h-20 object-cover rounded-lg border-2 border-[#E8E1D8]"/>
+                    <img src={imagePreviews[field.name]} alt="Preview" className="w-20 h-20 object-cover rounded-lg border-2 border-[#db8f2c]"/>
                     <span className="text-sm text-[#3D1609]">Cambiar imagen</span>
                   </div>
                 ) : (
@@ -235,7 +235,7 @@ const FormModal = ({isOpen, onClose, onSubmit, title, fields, initialData = {}, 
             </div>
             {/* Grid de previews */}
             {imagePreviews[field.name] && imagePreviews[field.name].length > 0 && (
-              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 p-3 bg-[#E8E1D8] rounded-lg">
+              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 p-3 bg-[#FFF] rounded-lg border-gray-900">
                 {imagePreviews[field.name].map((preview, index) => (
                   <div key={index} className="relative group">
                     <img src={preview} alt={`Preview ${index + 1}`} className="w-full h-24 object-cover rounded-lg border-2 border-white shadow-sm"/>
@@ -263,7 +263,7 @@ const FormModal = ({isOpen, onClose, onSubmit, title, fields, initialData = {}, 
       case 'checkbox':
         return (
           <div className="flex items-center space-x-2">
-            <input {...register(field.name)} type="checkbox" className="w-4 h-4 text-[#E07A5F] border-gray-300 rounded focus:ring-[#E07A5F]" disabled={isLoading}/>
+            <input {...register(field.name)} type="checkbox" className="w-4 h-4 text-[#A73249] border-gray-300 rounded focus:ring-[#A73249]" disabled={isLoading}/>
             <span className="text-sm text-gray-600">{field.checkboxLabel || field.label}</span>
           </div>
         )

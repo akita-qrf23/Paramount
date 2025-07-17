@@ -7,6 +7,7 @@ import ResetPassword from './pages/ResetPassword'
 import PergolaOnboarding from './pages/onBoarding'
 import Login from './pages/Login'
 import SignUp from './pages/Signup'
+import MainPage from './pages/MainPage'
 
 function App() {
   return (
@@ -47,6 +48,7 @@ function App() {
           <Route path="/reset-password" element={<ResetPassword/>}/>
           {/* Rutas protegidas */}
           <Route path="*" element={<Navigate to="/" replace/>}/>
+          <Route path="/main" element={<MainPage/>}/>
         </Routes>
       </div>
     </AuthProvider>

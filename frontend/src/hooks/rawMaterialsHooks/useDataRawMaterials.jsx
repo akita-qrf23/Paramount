@@ -146,7 +146,6 @@ const useDataRawMaterials = () => {
   }
   return {
     rawmaterials,
-    categories,
     suppliers,
     loading,
     fetchRawMaterials,

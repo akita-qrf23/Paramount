@@ -14,7 +14,7 @@ router.route()
 // Rutas que requieren un parámetro de id 
 router.route("/:id")
     .get(collectionsController.getCollection)
-    .put(upload.single("image"), collectionsController.putCategories)
+    .put(upload.single("image"), collectionsController.putCollections)
     .delete(collectionsController.deleteCollections)
 
 export default router
