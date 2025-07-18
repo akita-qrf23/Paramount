@@ -13,7 +13,24 @@ cloudinary.config({
 // CREATE (POST)
 productsController.postProducts = async (req, res) => {
     try {
-        const { name, description, codeProduct, stock, price, productionCost, discount, collection, category, subcategory, rawMaterialsUsed, highlighted, correlative, movementType, status, applicableCosts, hasDiscount } = req.body;
+        const { 
+          name, 
+          description,
+          codeProduct, 
+          stock, 
+          price, 
+          productionCost, 
+          discount, 
+          collection, 
+          category, 
+          subcategory, 
+          rawMaterialsUsed, 
+          highlighted, 
+          correlative, 
+          movementType, 
+          status, 
+          applicableCosts, 
+          hasDiscount } = req.body;
         // Verificar si el código de producto ya existe
         const existingProduct = await Products.findOne({ codeProduct });
         if (existingProduct) {
@@ -33,7 +50,25 @@ productsController.postProducts = async (req, res) => {
                 productImageURLs.push(result.secure_url);
             }
         }
-        const newProduct = new Products({ name, description, codeProduct, stock, price, productionCost, discount: discount || 0, images: productImageURLs, collection, category, subcategory, rawMaterialsUsed: Array.isArray(rawMaterialsUsed) ? rawMaterialsUsed : [rawMaterialsUsed], highlighted: highlighted || false, correlative, movementType, status, applicableCosts, hasDiscount: hasDiscount || false });
+        const newProduct = new Products({ 
+          name, 
+          description, 
+          codeProduct, 
+          stock, 
+          price, 
+          productionCost, 
+          discount: discount || 0, 
+          images: productImageURLs, 
+          collection, 
+          category, 
+          subcategory, 
+          rawMaterialsUsed: Array.isArray(rawMaterialsUsed) ? rawMaterialsUsed : [rawMaterialsUsed], 
+          highlighted: highlighted || false, 
+          correlative, 
+          movementType, 
+          status, 
+          applicableCosts, 
+          hasDiscount: hasDiscount || false });
         // Guardar producto
         await newProduct.save();
         // ESTADO DE CREACIÓN

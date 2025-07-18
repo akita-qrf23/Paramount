@@ -1,7 +1,7 @@
 import { useState, useRef } from 'react'
 import { useAuth } from '../../hooks/useAuth'
 import { User, Camera, Mail, Phone, Shield, Palette, Moon, Sun, Bell, Save, Eye, EyeOff } from 'lucide-react'
-
+ 
 const SettingsPage = () => {
   const { user } = useAuth()
   const fileInputRef = useRef(null)
@@ -35,7 +35,7 @@ const SettingsPage = () => {
   const handleImageUpload = (event) => {
     const file = event.target.files[0]
     if (!file) return
-    
+   
     // Simular carga de imagen
     setIsLoading(true)
     setTimeout(() => {
@@ -70,7 +70,7 @@ const SettingsPage = () => {
   }
   const toggleDarkMode = () => setIsDarkMode(!isDarkMode)
   const toggleEmailNotifications = () => setEmailNotifications(!emailNotifications)
-  
+ 
   const handleBrowserNotifications = () => {
     alert('Funcionalidad de notificaciones deshabilitada temporalmente')
   }
@@ -271,8 +271,8 @@ const SettingsPage = () => {
                 {/* Tema */}
                 <div className={`flex items-center justify-between p-4 border rounded-lg ${isDarkMode ? 'border-gray-600 bg-gray-700' : 'border-gray-200'}`}>
                   <div className="flex items-center space-x-3">
-                    {isDarkMode ? 
-                      <Moon className="w-5 h-5 text-blue-400" /> : 
+                    {isDarkMode ?
+                      <Moon className="w-5 h-5 text-blue-400" /> :
                       <Sun className="w-5 h-5 text-yellow-500" />
                     }
                     <div>

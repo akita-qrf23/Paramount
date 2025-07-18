@@ -19,6 +19,7 @@ const MainPage = () => {
     suppliersData,
     categoriesData,
     subcategoriesData,
+    customersData,
     collectionsData,
     productsData,
     rawmaterialsData,
@@ -40,7 +41,6 @@ const MainPage = () => {
     // Verificar si el usuario tiene permiso para la vista actual
     const permissions = {
       'admin': [ 'dashboard', 'search', 'products', 'customdesigns', 'designelements', 'rawmaterials', 'employees', 'categories','subcategories', 'collections', 'customers', 'orders', 'reviews', 'refunds', 'transactions', 'suppliers', 'settings' ],
-      'vendedor': [ 'dashboard', 'search', 'products', 'customdesigns', 'designelements', 'rawmaterials', 'categories','subcategories', 'collections', 'orders', 'reviews', 'refunds', 'transactions', 'suppliers', 'settings' ],
       'colaborador': [ 'dashboard', 'search', 'products', 'customdesigns', 'designelements', 'rawmaterials', 'categories','subcategories', 'collections', 'reviews', 'suppliers', 'settings' ],
     }
     const userPermissions = permissions[user.userType] || []

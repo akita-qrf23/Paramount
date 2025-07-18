@@ -8,7 +8,19 @@ import Customers from "../models/Customers.js";
 // CREATE (POST)
 ordersController.postOrders = async (req, res) => {
     try {
-        const { orderCode, customer, receiver, timetable, mailingAddress, paymentMethod, status, paymentStatus, deliveryDate, items, subtotal, total } = req.body;
+        const { 
+            orderCode, 
+            customer, 
+            receiver, 
+            timetable, 
+            mailingAddress, 
+            paymentMethod, 
+            status, 
+            paymentStatus, 
+            deliveryDate, 
+            items, 
+            subtotal, 
+            total } = req.body;
         // Verificar si el código de pedido ya existe
         const existingOrder = await Orders.findOne({ orderCode });
         if (existingOrder) {
@@ -21,7 +33,19 @@ ordersController.postOrders = async (req, res) => {
             // ESTADO DE ERROR DE INPUT DEL CLIENTE
             return res.status(400).json({ message: "Uno o más productos no existen" });
         }
-        const newOrder = new Orders({ orderCode, customer, receiver, timetable, mailingAddress, paymentMethod, status: status || "pendiente", paymentStatus: paymentStatus || "pendiente", deliveryDate: deliveryDate ? new Date(deliveryDate) : null, items, subtotal, total });
+        const newOrder = new Orders({ 
+            orderCode, 
+            customer, 
+            receiver, 
+            timetable, 
+            mailingAddress, 
+            paymentMethod, 
+            status: status || "pendiente", 
+            paymentStatus: paymentStatus || "pendiente", 
+            deliveryDate: deliveryDate ? new Date(deliveryDate) : null, 
+            items, 
+            subtotal, 
+            total });
         // Guardar el pedido
         await newOrder.save();
         // ESTADO DE CREACIÓN
@@ -35,7 +59,8 @@ ordersController.postOrders = async (req, res) => {
 ordersController.getOrders = async (req, res) => {
     try {
         // Buscar pedidos
-        const orders = await Orders.find().populate('customer', 'username email').populate({path: "items.itemId", select: "name price" });
+        const orders = await Orders.find()
+        .populate('customer', 'username email').populate({path: "items.itemId", select: "name price" });
         // ESTADO DE OK
         res.status(200).json(orders);
     } catch (error) {
@@ -47,7 +72,8 @@ ordersController.getOrders = async (req, res) => {
 ordersController.getOrder = async (req, res) => {
     try {
         // Buscar un solo pedido
-        const order = await Orders.findById(req.params.id).populate('customer', 'username email').populate({path: "items.itemId", select: "name price" });
+        const order = await Orders.findById(req.params.id)
+        .populate('customer', 'username email').populate({path: "items.itemId", select: "name price" });
         // Validar que el pedido si exista
         if (!order) {
             // ESTADO DE NO ENCONTRADO

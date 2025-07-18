@@ -5,11 +5,10 @@ import cookieParser from "cookie-parser"
 // Aqui importo todas las rutas que tiene el sistema de Pérgola
 import productsRoutes from "./src/routes/products.js"
 import customDesignsRoutes from "./src/routes/customDesigns.js"
-import designElementsRoutes from "./src/routes/designElement.js"
 import rawMaterialsRoutes from "./src/routes/rawMaterials.js"
 import employeesRoutes from "./src/routes/employees.js"
 import categoriesRoutes from "./src/routes/categories.js"
-import subcategoriesRoutes from "./src/routes/subcategories.js"
+import subcategoriesRoutes from "./src/routes/subCategories.js"
 import collectionsRoutes from "./src/routes/collections.js"
 import customersRoutes from "./src/routes/customers.js"
 import ordersRoutes from "./src/routes/orders.js"
@@ -34,7 +33,7 @@ app.use(express.json())
 app.use(cookieParser())
 app.use(cors({
   origin: "http://localhost:5173",
-  credentials: true
+  credentials: true 
 }))
 // Rutas que NO requieren login
 app.use("/api/login", loginRoutes)
@@ -43,14 +42,13 @@ app.use("/api/signup", signupRoutes)
 app.use("/api/signupCustomer", signupCustomerRoutes)
 app.use("/api/recoveryPassword", recoveryPasswordRoutes)
 app.use("/api/validatePassword", validatePasswordRoutes)
+app.use("/api/admin/profile", adminProfileRoutes) // Esta será pública para /data-public
 // Ruta especial para validar token (acepta cualquier tipo de usuario válido)
 app.use("/api/validateAuthToken", validateAuthTokenRoutes)
-app.use("/api/admin/profile", adminProfileRoutes) // Esta será pública para /data-public
 // Rutas que SÍ requieren login (protegidas) 
 app.use("/api/products", validateAuthToken(["admin", "colaborador"]), productsRoutes)
 app.use("/api/rawmaterials", validateAuthToken(["admin", "colaborador"]), rawMaterialsRoutes)
-app.use("/api/designelements", validateAuthToken(["admin", "colaborador"]), designElementsRoutes)
-app.use("/api/customdesigns", validateAuthToken(["admin", "colaborador", "customers"]), customDesignsRoutes)
+app.use("/api/customdesigns", validateAuthToken(["admin", "colaborador", "customer"]), customDesignsRoutes)
 app.use("/api/employees", validateAuthToken(["admin", "colaborador"]), employeesRoutes)
 app.use("/api/admin/profile", validateAuthToken(["admin"]), adminProfileRoutes) // Solo admin
 app.use("/api/collections", validateAuthToken(["admin", "colaborador"]), collectionsRoutes) 

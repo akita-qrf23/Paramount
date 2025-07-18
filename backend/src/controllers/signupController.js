@@ -6,7 +6,7 @@ import jsonwebtoken from "jsonwebtoken"
 import { config } from "../utils/config.js"
 //POST (CREATE)
 signupController.registerEmployee = async (req, res) => {
-    const {name, lastName, username, email,  password, phoneNumber, birthDate, DUI, userType, hireDate, isVerified} = req.body
+    const {name, lastName, username, email, phoneNumber, birthDate, DUI, password, userType, hireDate, isVerified} = req.body
 
     try {
         // Verificacion de si el empleado ya existe
@@ -17,8 +17,8 @@ signupController.registerEmployee = async (req, res) => {
         }
         // Encriptacion de contraseña
         const hashedPassword = await bcryptjs.hash(password, 10)
-        const newUser = new employeesModel({name, lastName, username, email,  password: hashedPassword, phoneNumber, birthDate: birthDate ? new Date(birthDate): null, DUI: DUI, userType: userType, hireDate: hireDate ? new Date(hireDate): null, isVerified: isVerified || false})
-        // Guardar el empleado
+        const newUser = new employeesModel({name, lastName, username, email, phoneNumber, birthDate: new Date(birthDate), DUI, password: hashedPassword,  userType, hireDate: new Date(hireDate), isVerified: isVerified || false})
+
         await newUser.save()
         // TOKEN
         jsonwebtoken.sign({id: newUser._id, userType}, config.JWT.secret, { expiresIn: config.JWT.expiresIn}, (err, token) => {
@@ -27,7 +27,19 @@ signupController.registerEmployee = async (req, res) => {
                 return res.status(500).json({ message: "Error al generar el token" })
             }
             res.cookie("authToken", token)
-            return res.status(201).json({ message: "Empleado registrado exitosamente", employee: { id: newUser._id, name: newUser.name, lastName: newUser.lastName, email: newUser.email, userType: newUser.userType }})
+            return res.status(201).json({ message: "Empleado registrado exitosamente", employee: {
+                id: newUser._id,
+                name: newUser.name,
+                lastName: newUser.lastName,
+                email: newUser.email,
+                phoneNumber: newUser.phoneNumber,
+                birthDate: newUser.birthDate,
+                DUI: newUser.DUI,
+                password: newUser.password,
+                userType: newUser.userType,
+                hireDate: newUser.hireDate,
+                isVerified: newUser.isVerified
+            }})
         })
     } catch (error) {
         console.log("error", error)

@@ -1,21 +1,22 @@
 import { useEffect, useState } from "react"
 import { toast } from "react-hot-toast"
 
+// Hook para manejar productos y sus datos relacionados
 const useDataProducts = () => {
   const API = "http://localhost:4000/api/products"
-  const [products, setProducts] = useState([])
-  const [categories, setCategories] = useState([])
-  const [subcategories, setSubategories] = useState([])
-  const [collections, setCollections] = useState([])
-  const [rawmaterials, setRawMaterials] = useState([])
-  const [loading, setLoading] = useState(true)
+  const [products, setProducts] = useState([]) // Lista de productos
+  const [categories, setCategories] = useState([]) // Lista de categorías
+  const [subcategories, setSubategories] = useState([]) // Lista de subcategorías
+  const [collections, setCollections] = useState([]) // Lista de colecciones
+  const [rawmaterials, setRawMaterials] = useState([]) // Lista de materias primas
+  const [loading, setLoading] = useState(true) // Estado de carga
 
+  // Cargar productos desde el servidor
   const fetchProducts = async () => {
     try {
       const response = await fetch(API, {
-        credentials: "include"
+        credentials: "include" // Incluye sesión
       })
-      // Si es 403 (sin permisos), no mostrar error
       if (response.status === 403) {
         console.log("⚠️ Sin permisos para productos - usuario no autorizado")
         setProducts([])
@@ -30,13 +31,14 @@ const useDataProducts = () => {
       setLoading(false)
     } catch (error) {
       console.error("Error al obtener productos:", error)
-      // Solo mostrar toast si NO es error de permisos
       if (!error.message.includes("403") && !error.message.includes("sin permisos")) {
         toast.error("Error al cargar artículos")
       }
       setLoading(false)
     }
   }
+
+  // Cargar colecciones
   const fetchCollections = async () => {
     try {
       const response = await fetch("http://localhost:4000/api/collections", {
@@ -51,6 +53,8 @@ const useDataProducts = () => {
       console.error("Error al obtener colecciones:", error)
     }
   }
+
+  // Cargar categorías
   const fetchCategories = async () => {
     try {
       const response = await fetch("http://localhost:4000/api/categories", {
@@ -65,6 +69,8 @@ const useDataProducts = () => {
       console.error("Error al obtener categorías:", error)
     }
   }
+
+  // Cargar subcategorías
   const fetchSubcategories = async () => {
     try {
       const response = await fetch("http://localhost:4000/api/subcategories", {
@@ -79,6 +85,8 @@ const useDataProducts = () => {
       console.error("Error al obtener subcategorías:", error)
     }
   }
+
+  // Cargar materias primas
   const fetchRawMaterials = async () => {
     try {
       const response = await fetch("http://localhost:4000/api/rawmaterials", {
@@ -93,6 +101,8 @@ const useDataProducts = () => {
       console.error("Error al obtener materias primas:", error)
     }
   }
+
+  // Cargar todo cuando el componente se monta
   useEffect(() => {
     fetchProducts()
     fetchCollections()
@@ -100,36 +110,38 @@ const useDataProducts = () => {
     fetchSubcategories()
     fetchRawMaterials()
   }, [])
+
+  // Funciones para agregar, editar y eliminar productos
   const createHandlers = (API) => ({
-    data: products,
-    loading,
+    data: products, // Devuelve los productos
+    loading, // Devuelve si está cargando
+
+    // Agregar producto
     onAdd: async (data) => {
       try {
-        // Usar FormData si hay imagen
         let body
         let headers = { credentials: "include" }
-        
-        // Si hay array de imágenes, usar FormData
+
+        // Si hay imágenes, usar FormData
         if (data.images && Array.isArray(data.images) && data.images.some(file => file instanceof File)) {
           const formData = new FormData()
           Object.keys(data).forEach(key => {
             if (key === "images") {
-              // Si el campo es 'images' y es un array, itera y añade cada archivo
               data.images.forEach((file) => {
                 if (file instanceof File) {
-                  formData.append("images", file) // Importante: mismo nombre de campo para cada archivo
+                  formData.append("images", file) // Adjunta imagen
                 }
               })
             } else {
-              formData.append(key, data[key])
+              formData.append(key, data[key]) // Adjunta otros campos
             }
           })
           body = formData
-          // No se establece el Content-Type para FormData, dejar que el navegador lo establezca
         } else {
           headers["Content-Type"] = "application/json"
           body = JSON.stringify(data)
         }
+
         const response = await fetch(`${API}/products`, {
           method: "POST",
           headers,
@@ -147,33 +159,34 @@ const useDataProducts = () => {
         toast.error(error.message || "Error al registrar producto")
         throw error
       }
-    }, onEdit: async (id, data) => {
+    },
+
+    // Editar producto
+    onEdit: async (id, data) => {
       try {
-        // Usar FormData si hay imagen (o imágenes)
         let body
         let headers = { credentials: "include" }
-        
-        // Si hay array de imágenes, usar FormData
+
+        // Si hay imágenes, usar FormData
         if (data.images && Array.isArray(data.images) && data.images.some(file => file instanceof File)) {
           const formData = new FormData()
           Object.keys(data).forEach(key => {
             if (key === "images") {
-              // Si el campo es 'images' y es un array, itera y añade cada archivo
               data.images.forEach((file) => {
                 if (file instanceof File) {
-                  formData.append("images", file) // Importante: mismo nombre de campo para cada archivo
+                  formData.append("images", file) // Adjunta imagen
                 }
               })
             } else {
-              formData.append(key, data[key])
+              formData.append(key, data[key]) // Adjunta otros campos
             }
           })
           body = formData
-          // No se establece el Content-Type para FormData, dejar que el navegador lo establezca
         } else {
           headers["Content-Type"] = "application/json"
           body = JSON.stringify(data)
         }
+
         const response = await fetch(`${API}/products/${id}`, {
           method: "PUT",
           headers,
@@ -191,8 +204,12 @@ const useDataProducts = () => {
         toast.error(error.message || "Error al actualizar producto")
         throw error
       }
-    }, onDelete: deleteProduct
+    },
+
+    onDelete: deleteProduct // Usa la función para borrar producto
   })
+
+  // Eliminar producto por ID
   const deleteProduct = async (id) => {
     try {
       const response = await fetch(`${API}/${id}`, {
@@ -212,6 +229,8 @@ const useDataProducts = () => {
       toast.error("Error al eliminar producto")
     }
   }
+
+  // Devuelve los datos y funciones listas para usar
   return {
     products,
     categories,
@@ -228,4 +247,5 @@ const useDataProducts = () => {
     createHandlers
   }
 }
+
 export default useDataProducts

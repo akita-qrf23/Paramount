@@ -1,5 +1,5 @@
 module.exports = {
-  content: ['./src/**/*.{js,jsx,ts,tsx}', './node_modules/@fortawesome/fontawesome-free/**/*.js', './index.html'],
+  content: ['./src/*/.{js,jsx,ts,tsx}', './node_modules/@fortawesome/fontawesome-free/*/.js', './index.html'],
   theme: {
     extend: {
       fontFamily: {

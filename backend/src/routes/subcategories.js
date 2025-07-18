@@ -2,7 +2,7 @@
 import express from "express"
 import multer from "multer"
 // Importo el controlador de subcategorías
-import subcategoriesController from "../controllers/subcategoriesController.js"
+import subcategoriesController from "../controllers/subCategoriesController.js"
 
 const router = express.Router()
 // Especificamos que los archivos multimedia se guarden en la carpeta public

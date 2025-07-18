@@ -4,14 +4,49 @@ import RawMaterials from "../models/RawMaterials.js";
 // POST (CREATE)
 rawMaterialsController.postRawMaterials = async (req, res) => {
     try {
-        const { name, description, type, color, tone, toneType, texture, shape, dimension, provider, brand, presentation, quantity, piecesPerPresentation, totalPieces, piecePrice, purchaseDate, stock } = req.body;
+        const { 
+            name, 
+            description, 
+            type, 
+            color, 
+            tone, 
+            toneType, 
+            texture, 
+            shape, 
+            dimension, 
+            provider, 
+            brand, 
+            presentation, 
+            quantity, 
+            piecesPerPresentation, 
+            totalPieces, 
+            piecePrice, 
+            purchaseDate, 
+            stock } = req.body;
         // Verificar si el correlativo ya existe
         const existingMaterial = await RawMaterials.findOne({ correlative });
         if (existingMaterial) {
             // Devolver error de input del cliente
             return res.status(400).json({ message: "El correlativo ya está en uso" });
         }
-        const newRawMaterial = new RawMaterials({ name, description, type, color, tone, toneType, texture, shape, dimension, provider, brand, presentation, quantity, piecesPerPresentation, totalPieces, piecePrice, purchaseDate: new Date(purchaseDate), stock });
+        const newRawMaterial = new RawMaterials({ 
+            name, 
+            description,
+            type, 
+            color, 
+            tone, 
+            toneType, 
+            texture, 
+            shape, 
+            dimension, 
+            provider, 
+            brand, 
+            presentation, 
+            quantity, 
+            piecesPerPresentation, 
+            totalPieces, 
+            piecePrice, 
+            purchaseDate: new Date(purchaseDate), stock });
         // Guardar materia prima
         await newRawMaterial.save();
         // ESTADO DE CREACIÓN

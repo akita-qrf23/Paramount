@@ -1,11 +1,3 @@
-/* Esta colección va a almacenar todas las reseñas de productos.
-"reviews": [
-    "product": "65a1bc2e3f4d8e2a1b2c3d4e",
-    "customer": "65a1bc2e3f4d8e2a1b2c3d4f",
-    "rating": 5,
-    "comment": "Excelente producto, muy buena calidad",
-    "response": "Gracias por tu compra, nos alegra que te guste"
-] */
 // Importar modelo y schema de mongoose
 import { Schema, model } from 'mongoose';
 // Definir el schema para Reviews
@@ -34,12 +26,20 @@ const reviewsSchema = new Schema({
         type: String,
         trim: true,
         minlength: [10, "El comentario debe tener al menos 10 caracteres"],
-        maxlength: [500, "El comentario no puede exceder los 500 caracteres"]
+        maxlength: [500, "El comentario no puede exceder los 500 caracteres"],
+        validate: {
+            validator: v => v.trim() !== '', // Asegurarse de que no sea una cadena vacía
+            message: "Los comentarios no puede estar vacíos"
+        }
     },
     response: {
         type: String,
         trim: true,
-        maxlength: [500, "La respuesta no puede exceder los 500 caracteres"]
+        maxlength: [500, "La respuesta no puede exceder los 500 caracteres"],
+        validate: {
+            validator: v => v.trim() !== '', // Asegurarse de que no sea una cadena vacía
+            message: "La respuesta no puede estar vacía"
+        }
     }
 }, {
     timestamps: true,

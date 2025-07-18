@@ -14,7 +14,6 @@ const Sidebar = ({ currentView, setCurrentView, onLogout }) => {
     
     const permissions = {
       'admin': [ 'dashboard', 'search', 'products', 'customdesigns', 'designelements', 'rawmaterials', 'employees', 'categories','subcategories', 'collections', 'customers', 'orders', 'reviews', 'refunds', 'transactions', 'suppliers', 'settings' ],
-      'vendedor': [ 'dashboard', 'search', 'products', 'customdesigns', 'designelements', 'rawmaterials', 'categories','subcategories', 'collections', 'orders', 'reviews', 'refunds', 'transactions', 'suppliers', 'settings' ],
       'colaborador': [ 'dashboard', 'search', 'products', 'customdesigns', 'designelements', 'rawmaterials', 'categories','subcategories', 'collections', 'reviews', 'suppliers', 'settings' ],
     }
     const allowedViews = permissions[user.userType] || []

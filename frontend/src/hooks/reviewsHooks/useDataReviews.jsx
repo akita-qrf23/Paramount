@@ -1,19 +1,20 @@
 import { useEffect, useState } from "react"
 import { toast } from "react-hot-toast"
 
+// Hook personalizado para manejar reseñas, clientes y productos
 const useDataReviews = () => {
   const API = "http://localhost:4000/api/reviews"
-  const [reviews, setReviews] = useState([])
-  const [customers, setCustomers] = useState([])
-  const [products, setProducts] = useState([])
-  const [loading, setLoading] = useState(true)
+  const [reviews, setReviews] = useState([]) // Lista de reseñas
+  const [customers, setCustomers] = useState([]) // Lista de clientes
+  const [products, setProducts] = useState([]) // Lista de productos
+  const [loading, setLoading] = useState(true) // Estado de carga
 
+  // Obtener reseñas desde el servidor
   const fetchReviews = async () => {
     try {
       const response = await fetch(API, {
-        credentials: "include"
+        credentials: "include" // Incluye cookies de sesión
       })
-      // Si es 403 (sin permisos), no mostrar error
       if (response.status === 403) {
         console.log("⚠️ Sin permisos para reseñas - usuario no autorizado")
         setReviews([])
@@ -27,13 +28,15 @@ const useDataReviews = () => {
       setReviews(data)
       setLoading(false)
     } catch (error) {
-      console.error("Error al obtener reseñas:", error)      // Solo mostrar toast si NO es error de permisos
+      console.error("Error al obtener reseñas:", error)
       if (!error.message.includes("403") && !error.message.includes("sin permisos")) {
-        toast.error("Error al cargar reseñas")
+        toast.error("Error al cargar reseñas") // Muestra error si no es por permisos
       }
       setLoading(false)
     }
   }
+
+  // Obtener clientes desde el servidor
   const fetchCustomers = async () => {
     try {
       const response = await fetch("http://localhost:4000/api/customers", {
@@ -48,6 +51,8 @@ const useDataReviews = () => {
       console.error("Error al obtener clientes:", error)
     }
   }
+
+  // Obtener productos desde el servidor
   const fetchProducts = async () => {
     try {
       const response = await fetch("http://localhost:4000/api/products", {
@@ -62,14 +67,20 @@ const useDataReviews = () => {
       console.error("Error al obtener productos:", error)
     }
   }
+
+  // Llama a las funciones cuando el componente se monta
   useEffect(() => {
     fetchReviews()
     fetchCustomers()
     fetchProducts()
   }, [])
+
+  // Funciones para agregar, editar y borrar reseñas
   const createHandlers = (API) => ({
-    data: reviews,
-    loading,
+    data: reviews, // Devuelve las reseñas
+    loading, // Devuelve el estado de carga
+
+    // Agrega una nueva reseña
     onAdd: async (data) => {
       try {
         const response = await fetch(`${API}/reviews`, {
@@ -89,7 +100,10 @@ const useDataReviews = () => {
         toast.error(error.message || "Error al registrar reseña")
         throw error
       }
-    }, onEdit: async (id, data) => {
+    },
+
+    // Edita una reseña existente
+    onEdit: async (id, data) => {
       try {
         const response = await fetch(`${API}/reviews/${id}`, {
           method: "PUT",
@@ -108,8 +122,12 @@ const useDataReviews = () => {
         toast.error(error.message || "Error al actualizar reseña")
         throw error
       }
-    }, onDelete: deleteReview
+    },
+
+    onDelete: deleteReview // Usa la función para borrar reseñas
   })
+
+  // Borra una reseña por su ID
   const deleteReview = async (id) => {
     try {
       const response = await fetch(`${API}/${id}`, {
@@ -129,6 +147,8 @@ const useDataReviews = () => {
       toast.error("Error al eliminar reseña")
     }
   }
+
+  // Devuelve funciones y datos para usar en el componente
   return {
     reviews,
     customers,
@@ -141,4 +161,5 @@ const useDataReviews = () => {
     createHandlers
   }
 }
+
 export default useDataReviews
