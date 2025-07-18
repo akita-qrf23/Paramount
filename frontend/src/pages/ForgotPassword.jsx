@@ -63,6 +63,7 @@ const ForgotPassword = () => {
           <img src={Logo} alt="Pérgola Joyería Logo" className="mx-auto max-w-full object-contain" style={{ width: 'min(320px, 90vw)', height: 'auto', maxHeight: '400px' }}/>
         </div>
       </div>
+
       {/* Sección Derecha - Forgot Password Content */}
       <div className="w-full lg:w-3/5 flex flex-col justify-center items-center px-8 sm:px-12 lg:px-16 py-8 lg:py-0 relative" style={{ backgroundColor: '#E3C6B8' }}>
         <div className="w-full max-w-lg text-center">

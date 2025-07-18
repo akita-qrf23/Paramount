@@ -8,6 +8,7 @@ import PergolaOnboarding from './pages/onBoarding'
 import Login from './pages/Login'
 import SignUp from './pages/Signup'
 import MainPage from './pages/MainPage'
+import ProtectedRoute from './components/Auth/ProtectedRoute'
 
 function App() {
   return (
@@ -47,8 +48,8 @@ function App() {
           <Route path="/verify-code" element={<VerifyCode/>}/>
           <Route path="/reset-password" element={<ResetPassword/>}/>
           {/* Rutas protegidas */}
+          <Route path="/main" element={<ProtectedRoute><MainPage/></ProtectedRoute>}/>
           <Route path="*" element={<Navigate to="/" replace/>}/>
-          <Route path="/main" element={<MainPage/>}/>
         </Routes>
       </div>
     </AuthProvider>

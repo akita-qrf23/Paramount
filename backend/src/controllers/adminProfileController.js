@@ -45,7 +45,7 @@ adminProfileController.getProfile = async (req, res) => {
 
         if (!adminUser) {
             // Si no existe, crearlo
-            const newAdmin = new adminModel({ name: "Admin", lastName: "MixArt", email: config.CREDENTIALS.email, profilePic: "" })
+            const newAdmin = new adminModel({ name: "Admin", lastName: "Pérgola", email: config.CREDENTIALS.email, profilePic: "" })
             await newAdmin.save()
             return res.json(newAdmin)
         }

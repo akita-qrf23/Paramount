@@ -81,7 +81,7 @@ const SignUp = () => {
       toast.error('El número de DUI debe tener el formato correcto (00000000-0)')
       return false
     }
-    if (!['colaborador'].includes(userType)) {
+    if (!'colaborador'.includes(userType)) {
       toast.error('Debe seleccionar un tipo de usuario válido')
       return false
     }
